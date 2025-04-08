@@ -48,6 +48,7 @@ import {
     IconShare,
     IconMessage,
     IconSettings,
+    IconRobot,
     IconDeviceSdCard,
     IconLogout
 } from "@tabler/icons-react";
@@ -1448,6 +1449,7 @@ const Home = ({
                                 { workspaces && workspaces.length > 0 ? 
                                 <Tab icon={<IconTournament />} title="Workspaces"><WorkspaceLegacyMessage /></Tab> : null}
                                 <Tab icon={<IconSettings />} title="Settings"><SettingsBar /></Tab>
+                                <Tab icon={<IconRobot />} title="Helpers"><Promptbar /></Tab>
                             </TabSidebar>
 
                             <div className="flex flex-1">
