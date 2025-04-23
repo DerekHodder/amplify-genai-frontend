@@ -1467,31 +1467,7 @@ const Home = ({
                             </div>
 
 
-                            <TabSidebar
-                                side={"right"}
-                                footerComponent={
-                                    featureFlags.memory && settings?.featureOptions.includeMemory && (
-                                        <div className="m-0 p-0 border-t dark:border-white/20 pt-1 text-sm">
-                                            <button
-                                                className="dark:text-white w-full"
-                                                onClick={() => setIsMemoryDialogOpen(true)}
-                                            >
-                                                <div className="flex items-center">
-                                                    <IconDeviceSdCard className="m-2" />
-                                                    <span>Memory</span>
-                                                </div>
-                                            </button>
-                                            <MemoryDialog
-                                                open={isMemoryDialogOpen}
-                                                onClose={() => setIsMemoryDialogOpen(false)}
-                                            />
-                                        </div>
-                                    )
-                                }
-                            >
-                                <Tab icon={<Icon3dCubeSphere />}><Promptbar /></Tab>
-                                {/*<Tab icon={<IconBook2/>}><WorkflowDefinitionBar/></Tab>*/}
-                            </TabSidebar>
+                            
 
                         </div>
                         <LoadingDialog open={!!loadingMessage} message={loadingMessage}/>
