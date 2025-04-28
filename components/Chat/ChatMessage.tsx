@@ -369,8 +369,8 @@ export const ChatMessage: FC<Props> = memo(({
                             ) : (
                                 <div className="flex flex-grow flex-col">
                                     <div className="flex flex-col">
-                                        <div className="flex flex-row">
-                                            <div className="prose whitespace-pre-wrap dark:prose-invert flex-1  max-w-none w-full">
+                                        <div className="flex flex-row justify-end">
+                                            <div className="prose whitespace-pre-wrap dark:prose-invert flex-1 max-w-none w-full text-right">
                                                 {getAtBlock()} {message.label || message.content}
                                             </div>
                                         </div>
@@ -396,7 +396,7 @@ export const ChatMessage: FC<Props> = memo(({
 
                             {!isEditing && (
                                 <div
-                                    className="px-3 md:-mr-8 ml-1 md:ml-0 flex flex-col md:flex-col items-center md:items-start justify-end md:justify-start">
+                                    className="px-3 md:-mr-8 ml-1 md:ml-0 flex flex-row gap-2 items-center justify-end">
                                     <div>
                                         {messagedCopied ? (
                                             <IconCheck
@@ -524,7 +524,7 @@ export const ChatMessage: FC<Props> = memo(({
                                 </div>
 
                                 { !isEditing && <div
-                                    className="px-3 md:-mr-8 ml-1 md:ml-0 flex flex-col md:flex-col gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
+                                    className="px-3 md:-mr-8 ml-1 md:ml-0 flex flex-row gap-2 items-center justify-end">
                                     {messagedCopied ? (
                                         <IconCheck
                                             size={20}
