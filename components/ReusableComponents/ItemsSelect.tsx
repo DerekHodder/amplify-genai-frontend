@@ -5,7 +5,7 @@ import { Prompt } from "@/types/prompt";
 import React from "react";
 import { FC, useContext, useEffect, useRef, useState } from "react";
 import Checkbox from "./CheckBox";
-import { IconFolder, IconMessage, IconRobot } from "@tabler/icons-react";
+import { IconFolder, IconMessage, IconRobot, IconChevronDown, IconChevronRight } from "@tabler/icons-react";
 
 interface Props {
     promptOptions?: Prompt[];
@@ -78,8 +78,21 @@ export const ItemSelect: FC<Props> = (
         switch (itemType) {
             case 'Prompt':
                 return (includePrompts ? promptFilter(promptOptions ?? promptsRef.current) : []) as Prompt[];
-            case 'Conversation':
-                return (includeConversations ? conversationFilter(conversationOptions ?? conversationsRef.current) : []) as Conversation[];
+            case 'Conversation': {
+                let convs = (includeConversations ? conversationFilter(conversationOptions ?? conversationsRef.current) : []) as Conversation[];
+                // Sort by date descending if date exists
+                return convs.sort((a, b) => {
+                    if (a.date && b.date) {
+                        return new Date(b.date).getTime() - new Date(a.date).getTime();
+                    } else if (a.date) {
+                        return -1;
+                    } else if (b.date) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+            }
             case 'Folder':
                 return (includeFolders ? folderFilter(folderOptions ?? foldersRef.current) : []) as FolderInterface[];
             default:
@@ -94,6 +107,12 @@ export const ItemSelect: FC<Props> = (
     const [allFoldersChecked, setAllFoldersChecked] = useState(false);
     const noItems = ITEM_TYPES.every(type => getItems(type).length === 0);
 
+    // Track expanded folders
+    const [expandedFolders, setExpandedFolders] = useState<{ [id: string]: boolean }>({});
+
+    const toggleFolder = (folderId: string) => {
+        setExpandedFolders(prev => ({ ...prev, [folderId]: !prev[folderId] }));
+    };
     
     const handlePromptsCheck = (checked:boolean) => {
         // if checked, add all prompts to selected, else remove them
@@ -246,25 +265,74 @@ export const ItemSelect: FC<Props> = (
 
 
     const renderItem = (item: Prompt | Conversation | FolderInterface, itemType: ItemType) => {
-            // Create a new ref for each item if it does not exist yet.
-            if (!itemRefs.current[item.id]) {
-                itemRefs.current[item.id] = React.createRef();
-            }
-    
+        // Create a new ref for each item if it does not exist yet.
+        if (!itemRefs.current[item.id]) {
+            itemRefs.current[item.id] = React.createRef();
+        }
+
+        // If this is a Conversation, try to show the date/time
+        let dateTime = null;
+        if (itemType === 'Conversation' && (item as Conversation).date) {
+            const date = new Date((item as Conversation).date as string);
+            dateTime = (
+                <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 font-normal">
+                    {date.toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}
+                </span>
+            );
+        }
+
+        // Folder dropdown logic
+        if (itemType === 'Folder') {
+            const folder = item as FolderInterface;
+            const isExpanded = expandedFolders[folder.id];
+            // Get conversations for this folder
+            const folderConversations = getItems('Conversation').filter(
+                (conv: Conversation) => conv.folderId === folder.id
+            );
             return (
-                <div className="flex items-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-[#40414F]" ref={itemRefs.current[item.id]} key={item.id}>
-                    <Checkbox
-                        id={item.id}
-                        label={``}
-                        checked={isSelected(item, itemType)}
-                        onChange={(checked: boolean) => handleItemSelect(item, itemType)}
-                    />
-                    <div className="ml-2 mb-1 text-black dark:text-white font-medium flex flex-row gap-2 ">
-                        {getIcon(item, itemType)} {item.name}
+                <div key={folder.id}>
+                    <div className="flex items-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-[#40414F]" ref={itemRefs.current[folder.id]}>
+                        <Checkbox
+                            id={folder.id}
+                            label={``}
+                            checked={isSelected(folder, 'Folder')}
+                            onChange={(checked: boolean) => handleItemSelect(folder, 'Folder')}
+                        />
+                        <button
+                            className="ml-2 flex items-center focus:outline-none"
+                            onClick={() => toggleFolder(folder.id)}
+                            type="button"
+                        >
+                            {isExpanded ? <IconChevronDown size={16} /> : <IconChevronRight size={16} />}
+                        </button>
+                        <div className="ml-2 mb-1 text-black dark:text-white font-medium flex flex-row gap-2 items-center ">
+                            {getIcon(folder, 'Folder')} {folder.name}
+                        </div>
                     </div>
+                    {isExpanded && folderConversations.length > 0 && (
+                        <div className="ml-8 border-l border-neutral-200 dark:border-neutral-700">
+                            {folderConversations.map((conv: Conversation) => renderItem(conv, 'Conversation'))}
+                        </div>
+                    )}
                 </div>
             );
-        };
+        }
+
+        // Default (Prompt/Conversation)
+        return (
+            <div className="flex items-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-[#40414F]" ref={itemRefs.current[item.id]} key={item.id}>
+                <Checkbox
+                    id={item.id}
+                    label={``}
+                    checked={isSelected(item, itemType)}
+                    onChange={(checked: boolean) => handleItemSelect(item, itemType)}
+                />
+                <div className="ml-2 mb-1 text-black dark:text-white font-medium flex flex-row gap-2 items-center ">
+                    {getIcon(item, itemType)} {item.name} {dateTime}
+                </div>
+            </div>
+        );
+    };
     
         const renderScrollableSection = (isChecked: boolean, handleCheck: (e :boolean) => void, itemType: ItemType) => {
             const items:Array<Prompt | Conversation | FolderInterface> = getItems(itemType);

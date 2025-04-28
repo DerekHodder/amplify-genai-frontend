@@ -176,18 +176,24 @@ export const ShareAnythingModal: FC<SharingModalProps> = (
                         <div className="mr-8">
                             <h3 className="flex flex-row text-black dark:text-white text-lg mt-2 border-b ">
                                 <IconNote className="mt-1.5 mx-2" size={18}/>
-                                Note
+                                Conversation Title <span style={{color: 'red'}}>*</span>
                             </h3>
                             <textarea
                                 className="mt-2 w-full rounded-lg border border-neutral-500 px-4 py-2 text-neutral-900 shadow focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-[#40414F] dark:text-neutral-100"
                                 style={{resize: 'none'}}
                                 placeholder={
-                                    "Describe what you are sharing (required)."
+                                    "Please concisely summarize your conversation for sharing (required, max 50 characters)"
                                 }
+                                maxLength={50}
                                 value={sharingNote || ''}
-                                onChange={(e) => setSharingNote(e.target.value)}
+                                onChange={(e) => {
+                                    if (e.target.value.length <= 50) setSharingNote(e.target.value);
+                                }}
                                 rows={1}
                             />
+                            <div className="text-xs text-neutral-500 dark:text-neutral-400 text-right">
+                                {sharingNote.length}/50 characters
+                            </div>
 
                             <ItemSelect
                                 selectedPromptsState={selectedPromptsState}

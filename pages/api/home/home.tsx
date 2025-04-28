@@ -48,6 +48,7 @@ import {
     IconShare,
     IconMessage,
     IconSettings,
+    IconRobot,
     IconDeviceSdCard,
     IconLogout
 } from "@tabler/icons-react";
@@ -473,6 +474,7 @@ const Home = ({
             folderId: folder.id,
             promptTemplate: null,
             isLocal: getIsLocalStorageSelection(storageSelection),
+            date: new Date().toISOString(),
             ...params
         };
         if (isRemoteConversation(newConversation)) uploadConversation(newConversation, foldersRef.current);
@@ -1167,7 +1169,8 @@ const Home = ({
                 temperature: lastConversation?.temperature ?? DEFAULT_TEMPERATURE,
                 folderId: folder.id,
                 promptTemplate: null,
-                isLocal: getIsLocalStorageSelection(storageSelection)
+                isLocal: getIsLocalStorageSelection(storageSelection),
+                date: new Date().toISOString()
             };
 
             if (isRemoteConversation(newConversation)) uploadConversation(newConversation, foldersRef.current);
@@ -1452,6 +1455,7 @@ const Home = ({
                                 { workspaces && workspaces.length > 0 ? 
                                 <Tab icon={<IconTournament />} title="Workspaces"><WorkspaceLegacyMessage /></Tab> : null}
                                 <Tab icon={<IconSettings />} title="Settings"><SettingsBar /></Tab>
+                                <Tab icon={<IconRobot />} title="Helpers"><Promptbar /></Tab>
                             </TabSidebar>
 
                             <div className="flex flex-1">
@@ -1469,31 +1473,7 @@ const Home = ({
                             </div>
 
 
-                            <TabSidebar
-                                side={"right"}
-                                footerComponent={
-                                    featureFlags.memory && settings?.featureOptions.includeMemory && (
-                                        <div className="m-0 p-0 border-t dark:border-white/20 pt-1 text-sm">
-                                            <button
-                                                className="dark:text-white w-full"
-                                                onClick={() => setIsMemoryDialogOpen(true)}
-                                            >
-                                                <div className="flex items-center">
-                                                    <IconDeviceSdCard className="m-2" />
-                                                    <span>Memory</span>
-                                                </div>
-                                            </button>
-                                            <MemoryDialog
-                                                open={isMemoryDialogOpen}
-                                                onClose={() => setIsMemoryDialogOpen(false)}
-                                            />
-                                        </div>
-                                    )
-                                }
-                            >
-                                <Tab icon={<Icon3dCubeSphere />}><Promptbar /></Tab>
-                                {/*<Tab icon={<IconBook2/>}><WorkflowDefinitionBar/></Tab>*/}
-                            </TabSidebar>
+                            
 
                         </div>
                         <LoadingDialog open={!!loadingMessage} message={loadingMessage}/>
