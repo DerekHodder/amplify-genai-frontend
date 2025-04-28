@@ -276,7 +276,7 @@ export const ItemSelect: FC<Props> = (
             const date = new Date((item as Conversation).date as string);
             dateTime = (
                 <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 font-normal">
-                    {date.toLocaleString()}
+                    {date.toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}
                 </span>
             );
         }
