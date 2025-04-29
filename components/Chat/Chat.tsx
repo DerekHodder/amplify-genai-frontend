@@ -4,6 +4,7 @@ import {
     IconShare,
     IconDownload,
     IconRocket,
+    IconHelp,
 } from '@tabler/icons-react';
 import {
     MutableRefObject,
@@ -66,6 +67,7 @@ import { useSession } from 'next-auth/react';
 import { ConfirmModal } from '../ReusableComponents/ConfirmModal';
 import { getActivePlugins } from '@/utils/app/plugin';
 import { Settings } from '@/types/settings';
+import AISafetyOverlay from '../Help/AISafetyOverlay';
 
 
 interface Props {
@@ -208,6 +210,7 @@ export const Chat = memo(({stopConversationRef}: Props) => {
         const [showScrollDownButton, setShowScrollDownButton] = useState<boolean>(false);
         const [promptTemplate, setPromptTemplate] = useState<Prompt | null>(null);
         const [mtdCost, setMtdCost] = useState<string>('Loading...'); // MTDCOST
+        const [isHelpOpen, setIsHelpOpen] = useState(false);
 
         const messagesEndRef = useRef<HTMLDivElement>(null);
         const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -963,7 +966,7 @@ export const Chat = memo(({stopConversationRef}: Props) => {
                 }} 
                 />
             }
-            <div className="relative flex-1 overflow-hidden bg-neutral-100 dark:bg-[#343541]">
+            <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
                 { modelError ? (
                     <ErrorMessageDiv error={modelError}/>  
                 ) : (
@@ -979,7 +982,7 @@ export const Chat = memo(({stopConversationRef}: Props) => {
                                         className="mx-auto flex flex-col space-y-1 md:space-y-8 px-3 pt-5 md:pt-10" 
                                         style={{width: windowInnerDims.width * 0.45}}>
                                         <div
-                                            className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
+                                            className="text-center text-3xl font-semibold text-black dark:text-white">
                                             {filteredModels.length === 0 ? (
                                                 <div className='flex flex-row gap-2 text-lg justify-center items-center'>
                                                     <Spinner size="16px" /> 
@@ -993,7 +996,7 @@ export const Chat = memo(({stopConversationRef}: Props) => {
 
                                         {filteredModels.length > 0 && (
                                             <div
-                                                className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600 shadow-[0_4px_10px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_10px_rgba(0,0,0,0.3)]">
+                                                className="flex h-full flex-col space-y-4 rounded-lg border border-[#8B7355] p-4 dark:border-[#8B7355] shadow-[0_4px_10px_rgba(139,115,85,0.2)] dark:shadow-[0_4px_10px_rgba(139,115,85,0.3)]">
                                                 
                                                 <div className="relative flex flex-row w-full items-center"> 
                                                     <div className="flex-grow">
@@ -1014,7 +1017,7 @@ export const Chat = memo(({stopConversationRef}: Props) => {
                                                                 }}
                                                                 title={"Advanced Conversation Settings"}
                                                                 >
-                                                                { <IconSettings className="block text-neutral-500 dark:text-neutral-200" size={20} />} 
+                                                                { <IconSettings className="block !text-[#8B7355]" size={20} />} 
                                                             </button>
                                                         </div>
                                                     
@@ -1131,7 +1134,7 @@ export const Chat = memo(({stopConversationRef}: Props) => {
                                     
 
                                     <div
-                                       className="items-center sticky top-0 py-3 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100  text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
+                                       className="items-center sticky top-0 py-3 z-10 flex justify-center border border-b-[#8B7355] bg-[#F9F5F2]  text-sm text-[#8B7355] dark:border-none dark:bg-[#8B7355] dark:text-[#D4C5B4]">
                                         {featureFlags.mtdCost  && (
                                             <>
                                                 <button
@@ -1166,7 +1169,7 @@ export const Chat = memo(({stopConversationRef}: Props) => {
                                             }}
                                             title="Chat Settings"
                                         >
-                                            <IconSettings size={18}/>
+                                            <IconSettings size={18} className="!text-[#8B7355]"/>
                                         </button>
                                         
                                         <button
@@ -1232,12 +1235,12 @@ export const Chat = memo(({stopConversationRef}: Props) => {
                                             className="flex flex-col md:gap-6 md:py-3 md:pt-6 lg:px-0 mx-16 ">
                                             { showSettings && !(selectedAssistant?.definition?.data?.model) &&
                                                 <div
-                                                    className="border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border custom-shadow">
+                                                    className="border-b border-[#8B7355] p-4 dark:border-[#8B7355] md:rounded-lg md:border custom-shadow">
                                                     <ModelSelect modelId={selectedModelId}/>
                                                 </div>
                                             }
                                             <div
-                                                className="border-b border-neutral-200 p-2 dark:border-neutral-600 md:rounded-lg md:border shadow-[0_2px_2px_rgba(0,0,0,0.1)] dark:shadow-[0_2px_2px_rgba(0,0,0,0.3)]">
+                                                className="border-b border-[#8B7355] p-2 dark:border-[#8B7355] md:rounded-lg md:border shadow-[0_2px_2px_rgba(139,115,85,0.1)] dark:shadow-[0_2px_2px_rgba(139,115,85,0.3)]">
                                                 <TagsList tags={selectedConversation?.tags || []} setTags={
                                                     (tags) => {
                                                         if (selectedConversation) {

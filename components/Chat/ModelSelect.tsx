@@ -55,7 +55,7 @@ export const ModelSelect: React.FC<Props> = ({modelId, isDisabled=false, handleM
   
   return (
     <div className="flex flex-col">
-      <label className="mb-2 text-left text-neutral-700 dark:text-neutral-400">
+      <label className="mb-2 text-left text-black dark:text-white">
         {isTitled? t('Model'): ""}
       </label>
       <div className="w-full rounded-lg border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:border-neutral-600 dark:text-white custom-shadow">

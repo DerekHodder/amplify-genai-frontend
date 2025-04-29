@@ -121,29 +121,34 @@ export const TabSidebar: React.FC<TabSidebarProps> = ({ side, children, footerCo
 
     return isOpen ? (
         
-        <div className={`fixed top-0 ${side}-0 flex h-full w-[280px] flex-none ${chatSide()? 'border-r dark:border-r-[#202123]' : 'border-l dark:border-l-[#202123]'}
-            flex-col space-y-0 bg-white text-black dark:text-white bg-[#f3f3f3] dark:bg-[#202123] text-[14px] sm:relative sm:top-0`} 
-            
+        <div className={`fixed top-0 ${side}-0 flex h-full w-[280px] flex-none ${chatSide()? 'border-r border-[#8B7355]/20 dark:border-r-[#8B7355]/20' : 'border-l border-[#8B7355]/20 dark:border-l-[#8B7355]/20'}
+            flex-col space-y-0 bg-[#F9F5F2]/90 dark:bg-[#8B7355]/10 text-[14px] sm:relative sm:top-0`} 
             style={{
                 zIndex: '20 !important'
               }}>
             {isMultipleTabs && (
-                <div className="mt-1 ml-1 flex flex-row gap-1 bg-neutral-100 dark:bg-[#202123] rounded-t">
+                <div className="flex flex-row !m-0 !p-0 w-full bg-[#F9F5F2]/90 dark:bg-[#8B7355]/10 border-b border-[#8B7355]/20 dark:border-[#8B7355]/20">
                     {childrenArray.map((child, index) => (
                         <button
                             key={index}
                             onClick={() => setActiveTab(index)}
-                            title={child.props.title}
-                            className={`px-3 py-2 rounded-t ${activeTab === index ? 'border-l border-t border-r dark:border-gray-500 dark:text-white shadow-[1px_0_1px_rgba(0,0,0,0.1),-1px_0_1px_rgba(0,0,0,0.1)] dark:shadow-[1px_0_3px_rgba(0,0,0,0.3),-1px_0_3px_rgba(0,0,0,0.3)]' : 'text-gray-400 dark:text-gray-600'}`}>
-                            {child.props.icon}
+                            className={`px-3 py-2 !m-0 ${
+                                activeTab === index
+                                    ? '!border !border-[#8B7355]/20 dark:!border-[#8B7355]/20 !border-b-0 !rounded-t-lg !bg-[#F9F5F2]/90 dark:!bg-[#8B7355]/10'
+                                    : 'opacity-50 hover:opacity-100'
+                            }`}
+                        >
+                            <div className="text-[#8B7355] dark:text-[#8B7355]">
+                                {child.props.icon}
+                            </div>
                         </button>
                     ))}
                 </div>
             )}
-            <div className="overflow-auto bg-neutral-100 dark:bg-[#202123] p-0 m-0 flex-grow">
+            <div className="overflow-auto !bg-[#F9F5F2]/90 dark:!bg-[#8B7355]/10 !p-0 !m-0 flex-grow border-r border-[#8B7355]/20 dark:border-[#8B7355]/20">
                 {childrenArray[activeTab].props.children}
             </div>
-            <div className="w-full mt-auto p-2 bg-neutral-100 dark:bg-[#202123]">
+            <div className="w-full mt-auto !p-2 !bg-[#F9F5F2]/90 dark:!bg-[#8B7355]/10 border-t border-[#8B7355]/20 dark:border-[#8B7355]/20">
                 {footerComponent}
             </div>
             <CloseSidebarButton onClick={toggleOpen} side={side} />

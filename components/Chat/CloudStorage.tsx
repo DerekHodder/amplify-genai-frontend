@@ -81,10 +81,12 @@ return  <button
     }}
     title={title()}
     >
-    { inCloud ? <IconCloudOff className="block text-neutral-500 dark:text-neutral-200" size={iconSize} /> : 
-    <div>
-      <IconCloud className="block dark:hidden" size={18} style={{ stroke: '#000000', fill: '#D3D3D3' }}/>
-      <IconCloudFilled className="hidden dark:block dark:text-neutral-200" size={18} />
-    </div>} 
+    { inCloud ? 
+      <IconCloudOff className="!text-[#8B7355]" size={iconSize} /> : 
+      <div>
+        <IconCloud className="block dark:hidden !text-[#8B7355]" size={18} />
+        <IconCloudFilled className="hidden dark:block !text-[#8B7355]" size={18} />
+      </div>
+    } 
 </button>
 };

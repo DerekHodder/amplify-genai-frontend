@@ -218,6 +218,13 @@ export const Chatbar = () => {
         side={'left'}
         isOpen={showChatbar}
         addItemButtonTitle={t('New Chat')}
+        searchBarProps={{
+          placeholder: t('Search conversations...'),
+          classNames: {
+            input: 'border border-[#8B7355]/20 focus:border-[#8B7355]/50 dark:border-[#8B7355]/20 dark:focus:border-[#8B7355]/50 text-[#8B7355] dark:text-[#D4C5B4] placeholder:text-[#8B7355]/50 dark:placeholder:text-[#D4C5B4]/50',
+            searchBox: 'rounded-md bg-[#F9F5F2]/50 dark:bg-[#8B7355]/10'
+          }
+        }}
         itemComponent={<Conversations conversations={filteredConversations} />}
         folderComponent={<ChatFolders sort={folderSort} searchTerm={searchTerm} conversations={filteredConversations} />}
         items={filteredConversations}
@@ -227,11 +234,11 @@ export const Chatbar = () => {
         handleCreateItem={() => {
           window.dispatchEvent(new CustomEvent('openArtifactsTrigger', { detail: { isOpen: false}} ));
           handleNewConversation({});
-        } }
+        }}
         handleCreateFolder={() => {
           const name = window.prompt("Folder name:");
           handleCreateFolder(name || "New Folder", 'chat');
-        } }
+        }}
         handleDrop={handleDrop}
         footerComponent={<> </>} 
         handleCreateAssistantItem={() => {}} 

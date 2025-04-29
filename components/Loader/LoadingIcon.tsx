@@ -11,7 +11,7 @@ export const animate = keyframes`
 `;
 
 export const LoadingIcon = styled(FiCommand)`
-  color: lightgray;
+  color: #8B7355;
   font-size: 1rem;
   animation: ${animate} 2s infinite;
 `;

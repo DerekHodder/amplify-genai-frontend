@@ -179,12 +179,12 @@ const Folder = ({
           {isRenaming ? (
             <div className="flex w-full items-center gap-3 bg-neutral-200 dark:bg-[#343541]/90 p-3 rounded">
               {isOpen ? (
-                <IconCaretDown className='flex flex-shrink-0' size={18} />
+                <IconCaretDown className='flex flex-shrink-0 text-[#8B7355] dark:text-[#D4C5B4]' size={18} />
               ) : (
-                <IconCaretRight className='flex flex-shrink-0' size={18} />
+                <IconCaretRight className='flex flex-shrink-0 text-[#8B7355] dark:text-[#D4C5B4]' size={18} />
               )}
               <input
-                className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 dark:text-white outline-none focus:border-neutral-100"
+                className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 !text-black dark:!text-black outline-none focus:border-neutral-100"
                 type="text"
                 value={renameValue}
                 onChange={(e) => setRenameValue(e.target.value)}
@@ -194,21 +194,23 @@ const Folder = ({
             </div>
           ) : (
             <button
-              className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-[#343541]/90`}
+              className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-[#F9F5F2] dark:hover:bg-[#8B7355]/10`}
               onClick={() => setIsOpen(!isOpen)}
               onDrop={(e) => dropHandler(e)}
               onDragOver={allowDrop}
               onDragEnter={highlightDrop}
               onDragLeave={removeHighlight}
-              title={isOpen ? "Collapse folder" : "Expand folder"}
+              title={currentFolder.name}
             >
-              {isOpen ? (
-                <IconCaretDown size={18} />
-              ) : (
-                <IconCaretRight size={18} />
-              )}
+              <div className="text-[#8B7355] dark:text-[#D4C5B4]">
+                {isOpen ? (
+                  <IconCaretDown size={18} />
+                ) : (
+                  <IconCaretRight size={18} />
+                )}
+              </div>
 
-              <div className="relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-4">
+              <div className="relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-3 !text-black dark:!text-black">
                 {currentFolder.name}
               </div>
             </button>

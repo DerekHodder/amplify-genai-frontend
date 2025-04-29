@@ -1,19 +1,19 @@
-import { FC } from 'react';
+import { ReactNode } from 'react';
 
 interface Props {
   text: string;
-  icon: JSX.Element;
+  icon: ReactNode;
   onClick: () => void;
 }
 
-export const SidebarButton: FC<Props> = ({ text, icon, onClick }) => {
+export const SidebarButton = ({ text, icon, onClick }: Props) => {
   return (
     <button
-      className="flex w-full cursor-pointer select-none items-center gap-3 rounded-md py-3 px-3 text-[14px] leading-3 dark:text-white transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-[#343541]/90" 
+      className="flex w-full cursor-pointer select-none items-center gap-3 rounded-md border border-[#8B7355]/20 p-3 text-black transition-colors duration-200 hover:bg-[#F9F5F2] dark:border-[#8B7355]/20 dark:text-black dark:hover:bg-[#8B7355]/10"
       onClick={onClick}
     >
-      <div>{icon}</div>
-      <span>{text}</span>
+      {icon}
+      <span className="text-[12.5px] leading-3">{text}</span>
     </button>
   );
 };

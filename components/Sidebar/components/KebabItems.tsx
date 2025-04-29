@@ -17,7 +17,7 @@ export const KebabItem: FC<ItemProps> = ({label, handleAction, icon, title=''}) 
         key={label}
         value={label}
         onClick={handleAction}
-        className={`w-full items-center gap-1 flex flex-row pr-1 pl-1 cursor-pointer hover:bg-neutral-200 dark:hover:bg-[#343541]/90`}>
+        className={`w-full items-center gap-1 flex flex-row pr-1 pl-1 cursor-pointer hover:bg-white/80 dark:hover:bg-[#343541]/90`}>
         <div className="text-neutral-900 dark:text-neutral-100 flex-shrink-0">{icon} </div>
          {label}
       </button>
@@ -91,7 +91,6 @@ interface MenuItemsProps {
 }
 
 export const KebabMenuItems: FC<MenuItemsProps> = ({ label, xShift=220, minWidth=72, children}) => {
-  // const childrenArray = React.Children.toArray(children) as React.ReactElement<ItemProps | ActionProps | MenuItemsProps>[];
   const childrenArray = React.Children.toArray(children)
                              .filter(Boolean) as React.ReactElement<ItemProps | ActionProps | MenuItemsProps>[];
 
@@ -101,7 +100,7 @@ export const KebabMenuItems: FC<MenuItemsProps> = ({ label, xShift=220, minWidth
   
   return (
     <div
-    className={`pr-1 pl-1 border-b dark:border-white/20 cursor-pointer dark:border-white/20 hover:bg-neutral-200 dark:hover:bg-[#343541]/90 flex w-full items-center `}
+    className={`pr-1 pl-1 border-b dark:border-white/20 cursor-pointer dark:border-white/20 hover:bg-white/80 dark:hover:bg-[#343541]/90 flex w-full items-center `}
       onMouseEnter={() => setIsSubMenuVisible(true)}
       onMouseLeave={() => setIsSubMenuVisible(false)}
     >
@@ -110,7 +109,7 @@ export const KebabMenuItems: FC<MenuItemsProps> = ({ label, xShift=220, minWidth
         <div 
           className={`relative`} 
           style={{ display: isSubMenuVisible ? 'block' : 'none', top: `-11px`}}>
-          <div className={`flex-grow absolute bg-neutral-100 dark:bg-[#202123] text-neutral-900 rounded border border-neutral-200 dark:border-neutral-600 dark:text-white z-50`}
+          <div className={`flex-grow absolute bg-white dark:bg-[#202123] text-neutral-900 rounded border border-neutral-200 dark:border-neutral-600 dark:text-white z-50`}
             style={{ transform: `translateX(${xShiftPercentage})`, minWidth: `${minWidth}px`}}>    
             {childrenArray} 
           </div>

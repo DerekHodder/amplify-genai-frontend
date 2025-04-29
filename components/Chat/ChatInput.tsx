@@ -4,7 +4,8 @@ import {
     IconAt,
     IconFiles,
     IconSend,
-    IconDeviceSdCard
+    IconDeviceSdCard,
+    IconPencil
 } from '@tabler/icons-react';
 import {
     KeyboardEvent,
@@ -581,9 +582,9 @@ const onAssistantChange = (assistant: Assistant) => {
         };
     }, []);
 
-    let buttonClasses = "left-1 top-2 rounded-sm p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200";
+    let buttonClasses = "left-1 top-2 rounded-sm p-1 hover:bg-[#F9F5F2] dark:bg-opacity-50 dark:hover:text-[#8B7355] [&>svg]:text-[#8B7355] dark:[&>svg]:text-[#8B7355]";
     if (isWorkflowOn) {
-        buttonClasses += " bg-green-400 text-white"; // provide your desired 'on' state style classes
+        buttonClasses += " bg-green-400 text-white";
     }
 
     const onCancelUpload = (document: AttachedDocument) => {
@@ -678,9 +679,9 @@ const onAssistantChange = (assistant: Assistant) => {
                
                {!showScrollDownButton && !messageIsStreaming && !artifactIsStreaming && featureFlags.qiSummary && !showDataSourceSelector &&
                (selectedConversation && selectedConversation.messages?.length > 0) &&  (
-               <div className="fixed flex flex-row absolute top-0 group prose dark:prose-invert  hover:text-neutral-900 dark:hover:text-neutral-100">
+               <div className="fixed flex flex-row absolute top-0 group prose dark:prose-invert  hover:text-[#8B7355] dark:hover:text-[#D4C5B4]">
                 <button
-                    className="mt-5 cursor-pointer border border-gray-300 dark:border-gray-600 rounded px-2 py-1"
+                    className="mt-5 cursor-pointer border border-[#8B7355] dark:border-[#8B7355] rounded px-2 py-1"
                     style={{ fontSize: '0.9rem' }} 
                     onClick={async () => {
                         // setShowPromptList(false);
@@ -793,7 +794,7 @@ const onAssistantChange = (assistant: Assistant) => {
     
                  </div>
 
-                <div className="relative mx-2 flex w-full flex-grow flex-col rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4" >
+                <div className="relative mx-2 flex w-full flex-grow flex-col rounded-md border border-[#8B7355]/10 bg-white shadow-[0_0_10px_rgba(139,115,85,0.2)] dark:border-[#8B7355]/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(139,115,85,0.3)] sm:mx-4" >
                 
 
                     <div className="px-2 flex items-center">
@@ -846,7 +847,7 @@ const onAssistantChange = (assistant: Assistant) => {
                             ref={textareaRef}
                             onFocus={() => setIsInputInFocus(true)}
                             onBlur={() => setIsInputInFocus(false)}
-                            className="m-0 w-full resize-none border-0 bg-transparent p-0 py-2 pr-8 pl-10 text-black dark:bg-transparent dark:text-white md:py-3 md:pl-10"
+                            className="m-0 h-10 w-full resize-none border-0 bg-transparent p-0 py-2 pr-8 pl-10 text-[#8B7355] dark:bg-transparent dark:text-[#D4C5B4] focus:ring-0 focus-visible:ring-0 dark:border-0 placeholder:text-[#8B7355] dark:placeholder:text-[#D4C5B4]"
                             style={{
                                 resize: 'none',
                                 bottom: `${textareaRef?.current?.scrollHeight}px`,
@@ -858,7 +859,6 @@ const onAssistantChange = (assistant: Assistant) => {
                                 }`,
                             }}
                             placeholder={
-                                // t('Type a message or type "/" to select a prompt...') || ''
                                 "Type a message to chat with Amplify..."
                             }
                             value={content}
@@ -870,10 +870,9 @@ const onAssistantChange = (assistant: Assistant) => {
                         />
 
                         <button
-                            // className="right-2 top-2 rounded-sm p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
-                            className={`right-2 top-2 rounded-sm p-1 text-neutral-800 mx-1 
-                                ${messageIsDisabled || !content? 'cursor-not-allowed ' : 'opacity-60 hover:bg-neutral-200 hover:text-neutral-900'} 
-                                dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200`}
+                            className={`right-2 top-2 rounded-sm p-1 mx-1 
+                                ${messageIsDisabled || !content? 'cursor-not-allowed ' : 'hover:bg-[#F9F5F2]'} 
+                                dark:bg-opacity-50 [&>svg]:text-[#8B7355] dark:[&>svg]:text-[#8B7355]`}
                             onClick={handleSend}
                             title={messageIsDisabled ? "Please address missing information to enable chat" 
                                                      : !content ? "Enter a message to start chatting" : "Send Prompt"}
@@ -881,7 +880,7 @@ const onAssistantChange = (assistant: Assistant) => {
                         >
                             {messageIsStreaming || artifactIsStreaming ? (
                                 <div
-                                    className="h-4 w-4 animate-spin rounded-full border-t-2 border-neutral-800 opacity-60 dark:border-neutral-100"></div>
+                                    className="h-4 w-4 animate-spin rounded-full border-t-2 border-[#8B7355] opacity-100 dark:border-[#8B7355]"></div>
                             ) : (
                                 <IconSend size={18}/>
                             )}
@@ -890,7 +889,7 @@ const onAssistantChange = (assistant: Assistant) => {
                         {showScrollDownButton && (
                             <div className="absolute bottom-12 right-0 lg:bottom-0 lg:-right-10">
                                 <button
-                                    className="flex h-7 w-7 items-center justify-center rounded-full bg-neutral-300 text-gray-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-neutral-200"
+                                    className="flex h-7 w-7 items-center justify-center rounded-full bg-[#F9F5F2] text-[#8B7355] shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#8B7355] dark:bg-[#8B7355] dark:text-[#D4C5B4]"
                                     onClick={onScrollDownClick}
                                     title="Scroll Down"
                                 >
@@ -931,7 +930,7 @@ const onAssistantChange = (assistant: Assistant) => {
 
                 {featureFlags.dataSourceSelectorOnInput && (
                         <button
-                            className="left-1 top-2 rounded-sm p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
+                            className={buttonClasses}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setShowDataSourceSelector(!showDataSourceSelector);
@@ -971,7 +970,6 @@ const onAssistantChange = (assistant: Assistant) => {
                             onKeyDown={(e) => {
                             }}
                             title="Select Assistants"
-
                         >
                             <IconAt size={20}/>
                         </button>
@@ -1008,7 +1006,7 @@ const onAssistantChange = (assistant: Assistant) => {
                                 onClick={handleShowProjectSelector}
                                 title="Project Memory"
                             >
-                                <IconDeviceSdCard size={20} />
+                                <IconDeviceSdCard size={20} className="!text-[#8B7355]" />
                             </button>
                         )}
 

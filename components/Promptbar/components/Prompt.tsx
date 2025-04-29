@@ -199,159 +199,147 @@ export const PromptComponent = ({ prompt }: Props) => {
     // @ts-ignore
     // @ts-ignore
     return (
-        <div className="relative flex items-center"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => {
-                setIsDeleting(false);
-                setIsRenaming(false);
-                setRenameValue('');
-                setIsHovered(false)
-            }
-            }
-        >
+        <div className="relative flex items-center">
+            <button
+                className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-[#F9F5F2] dark:hover:bg-[#8B7355]/10 ${
+                    isDeleting ? 'bg-[#F9F5F2] dark:bg-[#8B7355]/10' : ''
+                }`}
+                draggable="true"
+                onClick={() => {
+                    if (!isDeleting && !isRenaming) {
+                        setShowModal(true);
+                    }
+                }}
+                onDragStart={(e) => handleDragStart(e, prompt)}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <div className="text-[#8B7355] dark:text-[#D4C5B4]">
+                    {getIcon(prompt)}
+                </div>
 
-            <div className="relative flex w-full">
-                <button
-                    className="w-full  cursor-pointer p-1 items-center gap-1 rounded-lg p-2 text-sm transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-[#343541]/90"
-                    draggable={prompt.id.startsWith("astg") || isBase ? false : true} 
-                    onClick={(e) => {
-                        e.stopPropagation();
+                <div className="relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-3 !text-black dark:!text-black">
+                    {prompt.name}
+                </div>
 
-                        if(isAssistant(prompt)){
-                            // console.log("Assistant selected", prompt);
-                        }
-
-                        if(isAssistant(prompt) && prompt.data && prompt.data.assistant){
-                            console.log("Updating assistant...")
-                            handleStartConversation(prompt);
-                        }
-                        else {
-                            //setShowModal(true);
-                            handleStartConversation(prompt);
-                        }
-                    }}
-                    onDragStart={(e) => handleDragStart(e, prompt)}
-                    title="Use Template"
-                >
-                    {/*<IconEdit size={18} />*/}
-
-                    <div className="relative flex items-center overflow-hidden text-left text-[12.5px] leading-3">
-                        <div className="pr-2">
-                            {getIcon(prompt)}
-                        </div>
-                        <div
-                            className="overflow-hidden flex-1 text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-4">
-                            {prompt.name}
-                        </div>
-                    </div>
-
-                </button>
-
-                { checkPrompts && !groupId && !isBase &&  ( //&& !isReserved
-                    <div className="relative flex items-center">
-                        <div key={prompt.id} className="absolute right-4 z-10">
-                            <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={(e) => handleCheckboxChange(e.target.checked)}
-                            />
-                        </div>
-                    </div>
-                )}
-
-                {isHovered && !checkPrompts &&
-                    <div
-                        className="absolute top-1 right-0 flex-shrink-0 flex flex-row items-center space-y-0 bg-neutral-200 dark:bg-[#343541]/90 rounded">
-
-                        {!isDeleting && !isRenaming && canCopy && (
-                            <ActionButton handleClick={handleCopy} title="Duplicate Template">
-                                <IconCopy size={18} />
-                            </ActionButton>
-                        )}
-
-                        {(!isDeleting && !isRenaming && canEdit && !isBase) &&
-                         (groupId ? !syncingPrompts && featureFlags.assistantAdminInterface : true) && (
-                            <ActionButton title="Edit Template"
-                                handleClick={() => {
-                                    if (groupId) {
-                                        //show admin on ast 
-                                        window.dispatchEvent(new CustomEvent('openAstAdminInterfaceTrigger', 
-                                                                            { detail: { isOpen: true, 
-                                                                                        data: { 
-                                                                                            group: groups.find((g:Group) => g.id === groupId),
-                                                                                            assistant: prompt
-                                                                                        } 
-                                                                                      }} ));
-                                    } else {
-                                        setShowModal(true)
-                                    }
-                                }} 
-                            > 
-                                <IconEdit size={18} />
-                            </ActionButton>
-                        )}
-                        {!isDeleting && !isRenaming && !canEdit && !groupId && ( // && !isReserved
-                            <ActionButton handleClick={() => setShowModal(true)} title="View Template">
-                                <IconEye size={18} />
-                            </ActionButton>
-                        )}
-
-                        {!isDeleting && !isRenaming && canShare && (
-                            <ActionButton handleClick={() => {
-                                handleSharePrompt(prompt);
-                            }} title="Share Template">
-                                <IconShare size={18} />
-                            </ActionButton>
-                        )}
-
-                        {!isDeleting && !isRenaming && !groupId && !isBase &&( //&& !isReserved 
-                            <ActionButton handleClick={handleOpenDeleteModal} title="Delete Template">
-                                <IconTrash size={18} />
-                            </ActionButton>
-                        )}
-
-                        {(isDeleting || isRenaming) && (
+                {(isDeleting || isHovered || checkPrompts) && (
+                    <div className="absolute right-1 flex">
+                        {!isDeleting && !checkPrompts && (
                             <>
-                                <ActionButton handleClick={handleDelete} title="Confirm">
+                                {canEdit && (
+                                    <ActionButton
+                                        handleClick={(e) => {
+                                            e.stopPropagation();
+                                            setShowModal(true);
+                                        }}
+                                        title="Edit"
+                                        className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+                                    >
+                                        <IconEdit size={18} />
+                                    </ActionButton>
+                                )}
+
+                                {canCopy && (
+                                    <ActionButton
+                                        handleClick={(e) => {
+                                            e.stopPropagation();
+                                            handleCopy();
+                                        }}
+                                        title="Copy"
+                                        className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+                                    >
+                                        <IconCopy size={18} />
+                                    </ActionButton>
+                                )}
+
+                                {canShare && (
+                                    <ActionButton
+                                        handleClick={(e) => {
+                                            e.stopPropagation();
+                                            handleSharePrompt(prompt);
+                                        }}
+                                        title="Share"
+                                        className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+                                    >
+                                        <IconShare size={18} />
+                                    </ActionButton>
+                                )}
+
+                                <ActionButton
+                                    handleClick={(e) => {
+                                        e.stopPropagation();
+                                        handleStartConversation(prompt);
+                                    }}
+                                    title="Start Conversation"
+                                    className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+                                >
+                                    <IconEye size={18} />
+                                </ActionButton>
+
+                                {canDelete && (
+                                    <ActionButton
+                                        handleClick={handleOpenDeleteModal}
+                                        title="Delete"
+                                        className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+                                    >
+                                        <IconTrash size={18} />
+                                    </ActionButton>
+                                )}
+                            </>
+                        )}
+
+                        {isDeleting && (
+                            <>
+                                <ActionButton
+                                    handleClick={handleDelete}
+                                    className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+                                >
                                     <IconCheck size={18} />
                                 </ActionButton>
 
-                                <ActionButton handleClick={handleCancelDelete} title="Cancel">
+                                <ActionButton
+                                    handleClick={handleCancelDelete}
+                                    className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+                                >
                                     <IconX size={18} />
                                 </ActionButton>
                             </>
                         )}
-
                     </div>
-                }
+                )}
+            </button>
 
-            </div>
-
-            {showModal && !isAssistant(prompt) && (
-                <PromptModal
-                    prompt={prompt}
-                    onCancel={() => setShowModal(false)}
-                    onSave={() => setShowModal(false)}
-                    onUpdatePrompt={handleUpdate}
-                />
+            {checkPrompts && (
+                <div className="absolute right-4 z-10">
+                    <input
+                        type="checkbox"
+                        checked={checkedItems.includes(prompt)}
+                        onChange={(e) => handleCheckboxChange(e.target.checked)}
+                        className="accent-[#8B7355] dark:accent-[#D4C5B4]"
+                    />
+                </div>
             )}
 
-            {showModal && isAssistant(prompt) && (
-                <AssistantModal
-                    assistant={prompt}
-                    onCancel={() => setShowModal(false)}
-                    onSave={() => setShowModal(false)}
-                    onUpdateAssistant={async (assistantPrompt) => {
-                        handleUpdateAssistantPrompt(assistantPrompt, promptsRef.current, homeDispatch)
-                        statsService.editPromptCompletedEvent(assistantPrompt);
-                    }}
-                    loadingMessage="Updating assistant..."
-                    loc="edit_assistant"
-                    disableEdit={!canEdit}
-                />
+            {showModal && (
+                isAssistant(prompt) ? (
+                    <AssistantModal
+                        assistant={prompt}
+                        onCancel={() => setShowModal(false)}
+                        onSave={() => setShowModal(false)}
+                        onUpdateAssistant={handleUpdate}
+                        loadingMessage="Updating assistant..."
+                        loc="edit_assistant"
+                        disableEdit={!canEdit}
+                    />
+                ) : (
+                    <PromptModal
+                        prompt={prompt}
+                        onCancel={() => setShowModal(false)}
+                        onSave={() => setShowModal(false)}
+                        onUpdatePrompt={handleUpdate}
+                    />
+                )
             )}
-
-           
         </div>
     );
 };

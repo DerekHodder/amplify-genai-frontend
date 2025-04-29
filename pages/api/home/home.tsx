@@ -1432,30 +1432,25 @@ const Home = ({
                             <TabSidebar
                                 side={"left"}
                                 footerComponent={
-                                    <div className="m-0 p-0 border-t dark:border-white/20 pt-1 text-sm">
-                                        <button className="dark:text-white" title="Sign Out" onClick={() => {
+                                    <div className="m-0 p-0 border-t border-[#C4A484] pt-1 text-sm">
+                                        <button className="text-black" title="Sign Out" onClick={() => {
                                             const goLogout = async () => {
                                                 await federatedSignOut();
                                             };
                                             goLogout();
                                         }}>
-
                                             <div className="flex items-center">
                                                 <IconLogout className="m-2" />
                                                 <span>{isLoading ? 'Loading...' : getName(user?.email) ?? 'Unnamed user'}</span>
                                             </div>
-
                                         </button>
-
                                     </div>
                                 }
                             >
                                 <Tab icon={<IconMessage />} title="Chats"><Chatbar /></Tab>
                                 <Tab icon={<IconShare />} title="Share"><SharedItemsList /></Tab>
-                                { workspaces && workspaces.length > 0 ? 
-                                <Tab icon={<IconTournament />} title="Workspaces"><WorkspaceLegacyMessage /></Tab> : null}
-                                <Tab icon={<IconSettings />} title="Settings"><SettingsBar /></Tab>
                                 <Tab icon={<IconRobot />} title="Helpers"><Promptbar /></Tab>
+                                <Tab icon={<IconSettings />} title="Settings"><SettingsBar /></Tab>
                             </TabSidebar>
 
                             <div className="flex flex-1">

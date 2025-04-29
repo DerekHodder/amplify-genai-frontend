@@ -1,15 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 Header {
   background-color: #D42121;
+  padding: 0;
 }
 
 .logo {
   width: 25%;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
+  padding: 0;
+  margin: 0;
 }
 
 .DClogo {
@@ -19,7 +24,21 @@ Header {
 .headerText {
   width: 75%;
   text-align: left;
-  font-family: Helvetica;
+  padding: 0;
+  margin: 0;
+  font-family: 'Libre Caslon Text', serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+Header > div {
+  padding: 1rem 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 ::-webkit-scrollbar-track {
@@ -64,12 +83,14 @@ pre:has(div.codeblock) {
 
 
 .custom-shadow {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(210, 180, 140, 0.5);
+  border: 1px solid #E9DED3;
 }
 
 @media (prefers-color-scheme: dark) {
   .custom-shadow {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(210, 180, 140, 0.3);
+    border: 1px solid rgba(210, 180, 140, 0.3);
   }
 }
 

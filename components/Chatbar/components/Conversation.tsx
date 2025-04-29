@@ -169,28 +169,46 @@ export const ConversationComponent = ({ conversation}: Props) => {
   return (
     <div ref={conversationRef} className="relative flex items-center">
       {isRenaming && selectedConversation?.id === conversation.id ? (
-        <div className="flex w-full items-center gap-3 rounded-lg bg-neutral-200 dark:bg-[#343541]/90 p-3">
-          {isLocalConversation(conversation) ? <IconMessage size={18} /> 
+        <div className="flex w-full items-center gap-3 rounded-lg bg-[#F9F5F2] dark:bg-[#8B7355]/10 p-3">
+          <div className="text-[#8B7355] dark:text-[#D4C5B4]">
+            {isLocalConversation(conversation) ? <IconMessage size={18} /> 
                                              :  <div>
                                                   <IconCloud className="block dark:hidden" size={18} />
-                                                  <IconCloudFilled className="hidden dark:block dark:text-neutral-200" size={18} />
+                                                  <IconCloudFilled className="hidden dark:block" size={18} />
                                                 </div>}
+          </div>
           <input
-            className="mr-12 flex-1 ml-[-8px] overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 dark:text-white outline-none focus:border-neutral-100"
+            className="mr-12 flex-1 ml-[-8px] overflow-hidden overflow-ellipsis border-[#8B7355] bg-transparent text-left text-[12.5px] leading-3 text-[#8B7355] dark:text-[#D4C5B4] outline-none focus:border-[#8B7355]"
             type="text"
             value={renameValue}
             onChange={(e) => setRenameValue(e.target.value)}
             onKeyDown={handleEnterDown}
             autoFocus
           />
+
+          <div className="absolute right-1 flex">
+            <ActionButton
+              handleClick={handleConfirm}
+              className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+            >
+              <IconCheck size={18} />
+            </ActionButton>
+
+            <ActionButton
+              handleClick={handleCancel}
+              className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+            >
+              <IconX size={18} />
+            </ActionButton>
+          </div>
         </div>
       ) : (
         <button
-          className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-[#343541]/90 ${
+          className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-[#F9F5F2] dark:hover:bg-[#8B7355]/10 ${
             messageIsStreaming || artifactIsStreaming? 'disabled:cursor-not-allowed' : ''
           } ${
             selectedConversation?.id === conversation.id
-              ? 'bg-neutral-200 dark:bg-[#343541]/90'
+              ? 'bg-[#F9F5F2] dark:bg-[#8B7355]/10'
               : ''
           }`}
           onClick={() => handleSelectConversation(conversation)}
@@ -199,34 +217,55 @@ export const ConversationComponent = ({ conversation}: Props) => {
           onDragStart={(e) => handleDragStart(e, conversation)}
           title="View Conversation"
         >
-         {isLocalConversation(conversation) ? <IconMessage size={18} /> 
-                                            : <div>
-                                                <IconCloud className="block dark:hidden" size={18} />
-                                                <IconCloudFilled className="hidden dark:block dark:text-neutral-200" size={18} />
-                                              </div>}
-         
-          <div
-            className={`relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-4 ${
-              selectedConversation?.id === conversation.id ? 'pr-12' : 'pr-1'
-            }`}
-          >
+          <div className="text-[#8B7355] dark:text-[#D4C5B4]">
+            {isLocalConversation(conversation) ? <IconMessage size={18} /> 
+                                             :  <div>
+                                                  <IconCloud className="block dark:hidden" size={18} />
+                                                  <IconCloudFilled className="hidden dark:block" size={18} />
+                                                </div>}
+          </div>
+
+          <div className="relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-3 !text-black dark:!text-black">
             {conversation.name}
           </div>
+
+          {(isDeleting || isRenaming) ? (
+            <div className="absolute right-1 flex">
+              <ActionButton
+                handleClick={handleConfirm}
+                className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+              >
+                <IconCheck size={18} />
+              </ActionButton>
+
+              <ActionButton
+                handleClick={handleCancel}
+                className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+              >
+                <IconX size={18} />
+              </ActionButton>
+            </div>
+          ) : (
+            <div className="absolute right-1 flex">
+              <ActionButton
+                handleClick={handleOpenRenameModal}
+                title="Rename Conversation"
+                className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+              >
+                <IconPencil size={18} />
+              </ActionButton>
+
+              <ActionButton
+                handleClick={handleOpenDeleteModal}
+                title="Delete Conversation"
+                className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
+              >
+                <IconTrash size={18} />
+              </ActionButton>
+            </div>
+          )}
         </button>
       )}
-
-      {(isDeleting || isRenaming) &&
-        selectedConversation?.id === conversation.id && (
-          <div className="absolute right-1 z-10 flex text-gray-300">
-            <ActionButton handleClick={handleConfirm}>
-              <IconCheck size={18} />
-            </ActionButton>
-            <ActionButton handleClick={handleCancel}>
-              <IconX size={18} />
-            </ActionButton>
-          </div>
-        )}
-
 
       { checkConversations &&  (
         <div className="relative flex items-center">
@@ -239,18 +278,6 @@ export const ConversationComponent = ({ conversation}: Props) => {
           </div>
         </div>
       )}  
-
-      {selectedConversation?.id === conversation.id &&
-        !isDeleting && !isRenaming && !checkConversations &&
-        ( <div className="absolute right-1 z-10 flex text-gray-300">
-            <ActionButton handleClick={handleOpenRenameModal} title="Rename Conversation">
-              <IconPencil size={18} />
-            </ActionButton>
-            <ActionButton handleClick={handleOpenDeleteModal} title="Delete Conversation">
-              <IconTrash size={18} />
-            </ActionButton>
-          </div>
-        )}
     </div>
   );
 };

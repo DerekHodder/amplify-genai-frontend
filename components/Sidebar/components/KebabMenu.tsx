@@ -366,7 +366,7 @@ interface Props {
 
     return (
         <>
-        <div className="flex items-center border-b dark:border-white/20" style={{pointerEvents: isMenuOpen ? 'none' : 'auto'}}>
+        <div className="flex items-center border-b border-[#D4C5B4]/20 dark:border-[#D4C5B4]/20" style={{pointerEvents: isMenuOpen ? 'none' : 'auto'}}>
           <div className="pb-1 flex w-full text-lg ml-1 text-black dark:text-neutral-200 flex items-center">
             {label} 
             { isSyncing && 
@@ -422,7 +422,10 @@ interface Props {
                     disabled={isSyncing}
                     className={`outline-none focus:outline-none p-0.5 ${isMenuOpen ? 'bg-neutral-200 dark:bg-[#343541]/90' : ''}`}
                     onClick={toggleDropdown}>
-                    <IconDotsVertical size={20} className="flex-shrink-0 text-neutral-500 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100"/>
+                    <IconDotsVertical 
+                        size={20} 
+                        className="flex-shrink-0 text-[#8B7355] dark:text-[#8B7355] hover:text-[#8B7355]/70 dark:hover:text-[#8B7355]/70"
+                    />
                 </button>
             }
             

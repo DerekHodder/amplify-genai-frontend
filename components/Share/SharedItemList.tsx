@@ -9,6 +9,7 @@ import {
     IconRefresh,
     IconCheck,
     IconX,
+    IconHelp,
 } from '@tabler/icons-react';
 import {deleteYouSharedItem, getSharedItems, getYouSharedItems} from "@/services/shareService";
 import ExpansionComponent from "@/components/Chat/ExpansionComponent";
@@ -19,6 +20,7 @@ import HomeContext from "@/pages/api/home/home.context";
 import {useSession} from "next-auth/react";
 import { isAssistantById } from '@/utils/app/assistants';
 import ActionButton from '../ReusableComponents/ActionButton';
+import HelpOverlay from '../Help/HelpOverlay';
 
 
 function groupBy(key: string, array: ShareItem[]): { [key: string]: ShareItem[] } {
@@ -52,8 +54,11 @@ const SharedItemsList: FC<{}> = () => {
 
     const [activeTab, setActiveTab] = useState<string>('SWY');
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
+    const isAuthenticated = status === "authenticated";
     const user = session?.user;
+
+    const [isHelpOpen, setIsHelpOpen] = useState(false);
 
     useEffect( () => {
         const name = user?.email;
@@ -141,7 +146,7 @@ const SharedItemsList: FC<{}> = () => {
     };
 
     return (
-        <div className={`border-t dark:border-white/20 overflow-x-hidden`}>
+        <div className={`border-t border-[#8B7355] dark:border-[#8B7355] overflow-x-hidden`}>
 
             {importModalOpen && (
                 <ImportAnythingModal
@@ -169,28 +174,36 @@ const SharedItemsList: FC<{}> = () => {
                 includePrompts={true}
                 includeFolders={true}/>
 
-            <div className="flex flex-row items-center pt-3 pl-2 pr-3">
+            <div className="flex flex-row items-center pt-3 pl-2 pr-4">
                 <div className="mb-4 flex items-center space-x-2">
+                    {isAuthenticated && (
+                        <button
+                            className="flex flex-shrink-0 items-center justify-center w-7 h-7 rounded-full bg-red-500 hover:bg-red-600 text-white transition-colors duration-200"
+                            onClick={() => setIsHelpOpen(true)}
+                            title="Help"
+                        >
+                            ?
+                        </button>
+                    )}
                     <button
-                        className="text-sidebar flex flex-grow flex-shrink flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border dark:border-white/20 p-3 dark:text-white transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-gray-500/10"
+                        className="text-sidebar flex flex-grow flex-shrink flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-[#8B7355] dark:border-[#8B7355] p-3 text-black dark:text-black transition-colors duration-200 hover:bg-white/80 dark:hover:bg-[#8B7355]/10"
                         onClick={() => {
                             setIsModalOpen(true);
                         }}
                     >
-                        <IconShare size={16}/>
-                        Share with Other Users
+                        <IconShare size={16} className="text-black dark:text-black"/>
+                        Share Chats
                     </button>
                     <button
                         title='Refresh'
                         disabled={isLoading}
-                        className={`text-sidebar flex flex-grow flex-shrink-0 select-none items-center gap-3 rounded-md border dark:border-white/20 p-3 dark:text-white transition-colors duration-200 ${!isLoading ? "cursor-pointer hover:bg-neutral-200 dark:hover:bg-gray-500/10" : ""}`}
+                        className={`text-sidebar flex flex-grow flex-shrink-0 select-none items-center gap-3 rounded-md border border-[#8B7355] dark:border-[#8B7355] p-3 text-black dark:text-black transition-colors duration-200 ${!isLoading ? "cursor-pointer hover:bg-white/80 dark:hover:bg-[#8B7355]/10" : ""}`}
                         onClick={async () => {
                         if (user?.email) {
                            setIsLoading(true);
                            if (activeTab === "SWY") await fetchSWYData(user?.email);
                            if (activeTab === "YS") await fetchYSData(user?.email);
                            setIsLoading(false);
-
                         }}
                         }
                     >
@@ -201,35 +214,29 @@ const SharedItemsList: FC<{}> = () => {
 
             </div>
 
-            <div className="flex flex-row gap-1 bg-neutral-100 dark:bg-[#202123] rounded-t border-b dark:border-white/20">
-                        <button
-                            key={"sharedWithYou"}
-                            disabled={isLoading}
-                            onClick={() => setActiveTab("SWY")}
-                            className={`p-2 rounded-t flex flex-shrink-0 ${activeTab === "SWY" ? 'border-l border-t border-r dark:border-gray-500 dark:text-white' : 'text-gray-400 dark:text-gray-600'}`}>
-                            <h3 className="text-lg">Shared With You</h3> 
-                        </button>
-                        {/* <button
-                            key={"youShared"}
-                            disabled={isLoading}
-                            onClick={() => setActiveTab("YS")}
-                            className={`p-2 rounded-t flex flex-shrink-0 ${activeTab === "YS" ? 'border-l border-t border-r dark:border-gray-500 dark:text-white' : 'text-gray-400 dark:text-gray-600'}`}>
-                            <h3 className="text-lg">You Shared</h3> 
-                        </button> */}
+            <div className="flex flex-row gap-1 bg-[#F9F5F2] dark:bg-[#8B7355]/10 rounded-t border-b border-[#8B7355]">
+                <button
+                    key={"sharedWithYou"}
+                    disabled={isLoading}
+                    onClick={() => setActiveTab("SWY")}
+                    className={`p-2 rounded-t flex flex-shrink-0 text-black dark:text-black ${activeTab === "SWY" ? 'border-t border-l border-r border-[#8B7355]' : ''}`}
+                >
+                    <h3 className="text-lg">Shared With You</h3>
+                </button>
             </div>
            
 
             {isLoading ? (
                 <div className="flex flex-row ml-6 mt-6">
                     <LoadingIcon/>
-                    <span className="text-l font-bold ml-2">Loading...</span>
+                    <span className="text-l ml-2 text-black dark:text-black">Loading...</span>
                 </div>
             ) :  activeTab === "SWY" && groupedItems? (Object.entries(groupedItems).map(([sharedBy, items]) => (
                 <div key={sharedBy} className="sharedBy-group ml-3 mt-4 p-2">
                     <ExpansionComponent
                         title={sharedBy.includes('@')? sharedBy.split("@")[0] : sharedBy}
-                        openWidget={<IconCaretDown size={18}/>}
-                        closedWidget={<IconCaretRight size={18}/>}
+                        openWidget={<IconCaretDown size={18} className="text-[#8B7355] dark:text-[#8B7355]"/>}
+                        closedWidget={<IconCaretRight size={18} className="text-[#8B7355] dark:text-[#8B7355]"/>}
                         content={items.map((item, index) => (
                             <button
                             onMouseEnter={() => {
@@ -242,24 +249,24 @@ const SharedItemsList: FC<{}> = () => {
                             }
                             }
                                 key={index}
-                                className={`w-full flex cursor-pointer items-center gap-2 rounded-lg pb-2 pt-3 pr-2 text-sm transition-colors duration-200 ${isButtonHover ? "hover:bg-neutral-200 dark:hover:bg-[#343541]/90": ""}`}
+                                className={`w-full flex cursor-pointer items-center gap-2 rounded-lg pb-2 pt-3 pr-2 text-sm transition-colors duration-200 text-black dark:text-black hover:bg-[#F9F5F2] dark:hover:bg-[#8B7355]/10`}
                                 onClick={() => {
                                     setSharedBy(item.sharedBy);
                                     handleFetchShare(item);
                                 }}
                             >
-                                <IconShare size={18} className="ml-2 flex-shrink-0"/>
+                                <IconShare size={18} className="ml-2 flex-shrink-0 text-[#8B7355] dark:text-[#8B7355]"/>
                                 <div className="text-left text-[12.5px] leading-3 pr-1">
-                                    <div className="mb-1 text-gray-500">{new Date(item.sharedAt).toLocaleString()}</div>
+                                    <div className="mb-1 text-[#D4C4B7] dark:text-[#D4C4B7]">{new Date(item.sharedAt).toLocaleString()}</div>
                                     <div
-                                        className="relative text-left text-[12.5px] leading-3 pr-1"
+                                        className="relative text-left text-[12.5px] leading-3 pr-1 text-black dark:text-black"
                                         style={{wordBreak: "break-word", whiteSpace: "pre-line"}}
                                     >
                                         {item.note}
                                     </div>
                                 </div>
                                 {hoveredItem === item && ( 
-                                    <div className="ml-auto relative right-0 flex-shrink-0 flex flex-row items-center space-y-0 bg-neutral-200 dark:bg-[#343541]/90 rounded"
+                                    <div className="ml-auto relative right-0 flex-shrink-0 flex flex-row items-center space-y-0 bg-[#F9F5F2] dark:bg-[#8B7355]/10 rounded"
                                     onMouseEnter={() => {
                                         setHoveredItem(item)
                                         setIsButtonHover(false)
@@ -409,6 +416,7 @@ const SharedItemsList: FC<{}> = () => {
             //     )))
             // ) 
         }
+        {isAuthenticated && <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />}
         </div>
     );
 };

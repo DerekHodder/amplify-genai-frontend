@@ -647,7 +647,7 @@ If people need help with prompt engineering, which is how you converse effective
                                             handleGetItem(showExample.item);
                                         }
                                         }
-                                        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        className="flex items-center justify-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                         <IconDownload/> Get
                                     </button>
 
@@ -658,7 +658,7 @@ If people need help with prompt engineering, which is how you converse effective
                                             handleTryItem(showExample.item);
                                         }
                                         }
-                                        className="ml-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-neutral-700 rounded-lg hover:bg-neutral-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-700 dark:focus:ring-neutral-800">
+                                        className="ml-2 flex items-center justify-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                         <IconRocket/> Try It
                                     </button>
                                     </div>
@@ -668,7 +668,7 @@ If people need help with prompt engineering, which is how you converse effective
                                             handleNavCategory("");
                                         }
                                         }
-                                        className="mt-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-neutral-700 rounded-lg hover:bg-neutral-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-700 dark:focus:ring-neutral-800">
+                                        className="mt-6 flex items-center justify-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                         <IconHome/> Back Home
                                     </button>
                                     </div>
@@ -823,7 +823,7 @@ If people need help with prompt engineering, which is how you converse effective
                                             on top of the prompt engineering of others to accelerate your own work.
                                         </p>
                                         <button
-                                            className="w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                            className="w-full px-5 py-3 text-base font-medium text-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800"
                                             onClick={(e) => {
                                                e.stopPropagation();
                                                e.preventDefault();
@@ -896,13 +896,13 @@ If people need help with prompt engineering, which is how you converse effective
 
                                                 <div>
                                                 <a href="mailto:jules.white@vanderbilt.edu?subject=AI-Generated%40Prompts"
-                                                        className="w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                        className="w-full px-5 py-3 text-base font-medium text-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                                     Send Feedback
                                                 </a>
                                                 </div>
                                                 <div>
                                                 <a href="mailto:jules.white@vanderbilt.edu?subject=AI-Generated%40Prompts"
-                                                   className="w-full px-5 py-3 text-base font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 sm:w-auto dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                                                   className="w-full px-5 py-3 text-base font-medium text-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                                     Request a New Category
                                                 </a>
                                                 </div>
@@ -1038,7 +1038,7 @@ If people need help with prompt engineering, which is how you converse effective
                                                                         handleViewItemDetails(item);
                                                                     }
                                                                     }
-                                                                    className="m-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                                    className="m-2 flex items-center justify-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                                                     <IconChartArcs3/> Details &amp; Examples
                                                                 </button>
 
@@ -1049,7 +1049,7 @@ If people need help with prompt engineering, which is how you converse effective
                                                                         handleTryItem(item);
                                                                     }
                                                                     }
-                                                                    className="m-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-neutral-700 rounded-lg hover:bg-neutral-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-700 dark:focus:ring-neutral-800">
+                                                                    className="m-2 flex items-center justify-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                                                     <IconRocket/> Try It
                                                                 </button>
 
@@ -1060,7 +1060,7 @@ If people need help with prompt engineering, which is how you converse effective
                                                                         handleGetItem(item);
                                                                     }
                                                                     }
-                                                                    className="m-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                                    className="m-2 flex items-center justify-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                                                     <IconDownload/> Get
                                                                 </button>
 
@@ -1072,7 +1072,7 @@ If people need help with prompt engineering, which is how you converse effective
                                                                             handleMarketItemDelete(item);
                                                                         }
                                                                         }
-                                                                        className="m-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                                        className="m-2 flex items-center justify-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                                                         Delete
                                                                     </button>
                                                                     )}
@@ -1147,7 +1147,7 @@ If people need help with prompt engineering, which is how you converse effective
                                                                     By: {item.author}
                                                                 </p>
                                                                 <a href="#"
-                                                                   className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                                   className="flex items-center justify-center text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                                                     <IconDownload/> Get
                                                                 </a>
                                                             </div>
@@ -1165,7 +1165,7 @@ If people need help with prompt engineering, which is how you converse effective
                                                         e.preventDefault();
                                                         setSearchCategory("*");
                                                     }}
-                                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                    className="text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                                     See All Categories
                                                 </button>
                                             )}
@@ -1175,7 +1175,7 @@ If people need help with prompt engineering, which is how you converse effective
                                                         e.preventDefault();
                                                         setSearchCategory(category);
                                                     }}
-                                                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-7 py-2.5 me-2 mb-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                    className="text-white bg-[#8B7355] rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-[#8B7355] dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                                                     See All in {category}
                                                 </button>
                                             )}
