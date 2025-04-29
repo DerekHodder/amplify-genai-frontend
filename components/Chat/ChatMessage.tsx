@@ -270,15 +270,16 @@ export const ChatMessage: FC<Props> = memo(({
             return (<span className="bg-neutral-300 dark:bg-neutral-600 rounded-xl pr-1 pl-1">
                                                         {"@" + assistantRecipient.definition.name + ":"}
                                                     </span>);
-        } else if(!isActionResult) {
+        } else if(!isActionResult && message.role === 'assistant') {
             return (<span className="bg-neutral-300 dark:bg-neutral-600 rounded-xl pr-1 pl-1">
                                                         @Amplify:
                                                     </span>);
-        } else {
+        } else if(isActionResult) {
            return (<span className="bg-yellow-500 dark:bg-yellow-500 text-black rounded-xl py-1.5 pr-1 pl-1">
                                                         {'\u2713 Action Completed:'}
                                                     </span>);
         }
+        return null;
     }
 
     const handleRatingSubmit = (r: number) => {
@@ -349,289 +350,153 @@ export const ChatMessage: FC<Props> = memo(({
 
             <div
                 className="relative m-[30px] flex p-2 text-base md:gap-6 md:py-2">
-                <div className="ml-[45px] min-w-[40px] text-right font-bold">
-                    {getIcon()}
-                </div>
-
-                <div className="max-w-none prose mt-[-2px] w-full dark:prose-invert mr-5">
-                    {message.role === 'user' ? (
-                        <div className="flex flex-grow">
-                            {isEditing ? (
-
-                                <UserMessageEditor
-                                    message={message}
-                                    handleEditMessage={handleEditMessage}
-                                    setIsEditing={setIsEditing}
-                                    isEditing={isEditing}
-                                    messageContent={messageContent}
-                                    setMessageContent={setMessageContent}/>
-
-                            ) : (
-                                <div className="flex flex-grow flex-col">
-                                    <div className="flex flex-col">
-                                        <div className="flex flex-row justify-end">
-                                            <div className="prose whitespace-pre-wrap dark:prose-invert flex-1 max-w-none w-full text-right">
-                                                {getAtBlock()} {message.label || message.content}
-                                            </div>
+                {message.role === 'assistant' && (
+                    <div className="ml-[45px] min-w-[40px] text-right font-bold">
+                        {getIcon()}
+                    </div>
+                )}
+                
+                {message.role === 'user' ? (
+                    <div className="flex flex-grow">
+                        {isEditing ? (
+                            <UserMessageEditor
+                                message={message}
+                                handleEditMessage={handleEditMessage}
+                                setIsEditing={setIsEditing}
+                                isEditing={isEditing}
+                                messageContent={messageContent}
+                                setMessageContent={setMessageContent}/>
+                        ) : (
+                            <div className="flex flex-grow flex-col">
+                                <div className="flex flex-col">
+                                    <div className="flex flex-row justify-end">
+                                        <div className="prose whitespace-pre-wrap dark:prose-invert flex-1 max-w-none w-full text-right">
+                                            {getAtBlock()} {message.label || message.content}
                                         </div>
-                                        <DataSourcesBlock message={message} handleDownload={handleDownload}/>
-                                        {isActionResult && (
-                                            <ChatSourceBlock
-                                                messageIsStreaming={messageIsStreaming}
-                                                message={message}
-                                            />
-                                        )}
                                     </div>
-                                    <div className="flex flex-row">
-                                        {(isEditing || messageIsStreaming) ? null : (
-
-                                            <ChatFollowups promptSelected={(p) => {
-                                                onSendPrompt(p)
-                                            }}/>
-
-                                        )}
-                                    </div>
-                                </div>
-                            )}
-
-                            {!isEditing && (
-                                <div
-                                    className="px-3 md:-mr-8 ml-1 md:ml-0 flex flex-row gap-2 items-center justify-end">
-                                    <div>
-                                        {messagedCopied ? (
-                                            <IconCheck
-                                                size={20}
-                                                className="text-green-500 dark:text-green-400"
-                                            />
-                                        ) : (
-                                            <button
-                                                className={chat_icons_cn}
-                                                onClick={copyOnClick}
-                                                title="Copy Prompt"
-                                            >
-                                                <IconCopy size={20}/>
-                                            </button>
-                                        )}
-                                    </div>
-                                    {!isActionResult && (
-                                    <div>
-                                        <button
-                                            className={chat_icons_cn}
-                                            onClick={() => setIsDownloadDialogVisible(true)}
-                                            title="Download Prompt"
-                                        >
-                                            <IconDownload size={20}/>
-                                        </button>
-                                    </div>)
-                                    }
-                                    <div>
-                                        <button
-                                            className={chat_icons_cn}
-                                            onClick={toggleEditing}
-                                            title="Edit Prompt"
-                                        >
-                                            <IconEdit size={20}/>
-                                        </button>
-                                    </div>
-                                    <button
-                                        className={chat_icons_cn}
-                                        onClick={() => handleForkConversation(messageIndex)}
-                                        title="Branch Into New Conversation"
-                                    >
-                                        <IconArrowFork size={20}/>
-                                    </button>
-                                    {!isActionResult && (
-                                    <div>
-                                        <button
-                                            className={chat_icons_cn}
-                                            onClick={handleDeleteMessage}
-                                            title="Delete Prompt"
-                                        >
-                                            <IconTrash size={20}/>
-                                        </button>
-                                    </div>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    ) : ( // Assistant message
-                        <div className="flex flex-col w-full" ref={markdownComponentRef}>
-                            <div className="flex flex-row w-full">
-                                <div className="flex flex-col w-full">
-                                    {(selectedConversation?.messages.length === messageIndex + 1) && (
-                                        <PromptingStatusDisplay statusHistory={status}/>
-                                    )}
-                                     {featureFlags.highlighter && settingRef.current.featureOptions.includeHighlighter && 
-                                      isHighlightDisplay && !isEditing && 
-
-                                        <AssistantMessageHighlight
-                                            messageIndex={messageIndex}
+                                    <DataSourcesBlock message={message} handleDownload={handleDownload}/>
+                                    {isActionResult && (
+                                        <ChatSourceBlock
+                                            messageIsStreaming={messageIsStreaming}
                                             message={message}
-                                            selectedConversation={selectedConversation}
-                                            setIsHighlightDisplay={setIsHighlightDisplay}
                                         />
-                                        
-                                        }
-                                    {!isEditing && !isHighlightDisplay && (
-                                      <>
-                                          <div className="flex flex-grow"
-                                               
-                                               ref={divRef}
-                                          >
-                                            <ChatContentBlock
-                                                messageIsStreaming={messageIsStreaming}
-                                                messageIndex={messageIndex}
-                                                message={message}
-                                                selectedConversation={selectedConversation}
-                                                handleCustomLinkClick={handleCustomLinkClick}
-                                              />
-                                          </div>
-
-                                          <AgentLogBlock
-                                            messageIsStreaming={messageIsStreaming}
-                                            message={message}
-                                            conversationId={selectedConversation?.id || ""}
-                                          />
-
-                                          {featureFlags.artifacts &&
-                                            <ArtifactsBlock
-                                              message={message}
-                                              messageIndex={messageIndex}
-                                            />}
-
-                                          <ChatCodeInterpreterFileBlock
-                                            messageIsStreaming={messageIsStreaming}
-                                            message={message}
-                                            selectedConversation={selectedConversation}
-                                            updateConversation={handleUpdateSelectedConversation}
-                                          />
-                                          <ChatSourceBlock
-                                            messageIsStreaming={messageIsStreaming}
-                                            message={message}
-                                          />
-                                      </>
-                                    )}
-
-                                    {isEditing && (
-                                      <AssistantMessageEditor
-                                        message={message}
-                                        handleEditMessage={handleEditMessage}
-                                            setIsEditing={setIsEditing}
-                                            isEditing={isEditing}
-                                            messageContent={messageContent}
-                                            setMessageContent={setMessageContent}/>
                                     )}
                                 </div>
-
-                                { !isEditing && <div
-                                    className="px-3 md:-mr-8 ml-1 md:ml-0 flex flex-row gap-2 items-center justify-end">
-                                    {messagedCopied ? (
-                                        <IconCheck
-                                            size={20}
-                                            className="text-green-500 dark:text-green-400"
-                                        />
-                                    ) : (
-                                        <button
-                                        className={chat_icons_cn}
-                                            onClick={copyOnClick}
-                                            title="Copy Response"
-                                        >
-                                            <IconCopy size={20}/>
-                                        </button>
-                                    )}
-
-                                    <button
-                                        className={chat_icons_cn}
-                                        onClick={() => handleCreateArtifactFromMessage(messageContent)}
-                                        title="Turn Into Artifact"
-                                    >
-                                        <IconLibrary size={20}/>
-                                    </button>
-
-                                    <button
-                                        className={chat_icons_cn}
-                                        onClick={() => setIsDownloadDialogVisible(true)}
-                                        title="Download Response"
-                                    >
-                                        <IconDownload size={20}/>
-                                    </button>
-                                    <button
-                                        className={chat_icons_cn}
-                                        title="Email Response"
-                                    >
-                                        <a className={chat_icons_cn}
-                                           href={`mailto:?body=${encodeURIComponent(messageContent)}`}>
-                                            <IconMail size={20}/>
-                                        </a>
-                                    </button>
-
-                                    {featureFlags.highlighter && 
-                                     settingRef.current.featureOptions.includeHighlighter && 
-                                        <button
-                                            className={chat_icons_cn}
-                                            onClick={() => {setIsHighlightDisplay(!isHighlightDisplay)}}
-                                            title="Prompt On Highlight"
-                                        >
-                                            <IconHighlight size={20}/>
-                                        </button>
-                                    }
-                                    <button
-                                        className={chat_icons_cn}
-                                        onClick={toggleEditing}
-                                        title="Edit Response"
-                                    >
-                                        <IconEdit size={20}/>
-                                    </button>
-                                    <button
-                                        className={chat_icons_cn}
-                                        onClick={() => handleForkConversation(messageIndex)}
-                                        title="Branch Into New Conversation"
-                                    >
-                                        <IconArrowFork size={20}/>
-                                    </button>
-
-                                </div>}
+                                {(isEditing || messageIsStreaming) ? null : (
+                                    <ChatFollowups promptSelected={(p) => {
+                                        onSendPrompt(p)
+                                    }}/>
+                                )}
                             </div>
-                            {(messageIsStreaming || isEditing) ? null : (
-                                <ChatFollowups promptSelected={(p) => {
-                                    onSendPrompt(p)
-                                }}/>
+                        )}
+                    </div>
+                ) : (
+                    <div className="flex flex-col w-full" ref={markdownComponentRef}>
+                        <div className="flex flex-col w-full">
+                            {(selectedConversation?.messages.length === messageIndex + 1) && (
+                                <PromptingStatusDisplay statusHistory={status}/>
                             )}
-                            {message.data?.state?.currentAssistantId && message.data?.state?.currentAssistantId.startsWith('astgp') && !messageIsStreaming && !isEditing && (
-                                <>
-                                    <Stars
-                                        starRating={message.data?.rating || 0}
-                                        setStars={handleRatingSubmit}
+                            {featureFlags.highlighter && settingRef.current.featureOptions.includeHighlighter && 
+                             isHighlightDisplay && !isEditing && 
+                                <AssistantMessageHighlight
+                                    messageIndex={messageIndex}
+                                    message={message}
+                                    selectedConversation={selectedConversation}
+                                    setIsHighlightDisplay={setIsHighlightDisplay}
+                                />
+                            }
+                            <>
+                                <div className="flex flex-grow"
+                                     ref={divRef}
+                                >
+                                    <ChatContentBlock
+                                        messageIsStreaming={messageIsStreaming}
+                                        messageIndex={messageIndex}
+                                        message={message}
+                                        selectedConversation={selectedConversation}
+                                        handleCustomLinkClick={handleCustomLinkClick}
                                     />
-                                    {showFeedbackInput && (
-                                        <div className="mt-2">
-                                            <textarea
-                                                className="w-full p-2 border rounded bg-white text-gray-800 dark:bg-gray-700 dark:text-white"
-                                                value={feedbackText}
-                                                onChange={(e) => setFeedbackText(e.target.value)}
-                                                placeholder="Please provide any additional feedback"
-                                            />
-                                            <button
-                                                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
-                                                onClick={() => {
-                                                    handleFeedbackSubmit();
-                                                    setShowFeedbackInput(false);
-                                                }}
-                                            >
-                                                Submit Feedback
-                                            </button>
-                                        </div>
-                                    )}
-                                </>
-                            )}
-                            {((messageIsStreaming || artifactIsStreaming) && messageIndex == (selectedConversation?.messages.length ?? 0) - 1) ?
-                                // <LoadingIcon />
-                                <Loader type="ping" size="48"/>
-                                : null}
+                                </div>
+                                <AgentLogBlock
+                                    messageIsStreaming={messageIsStreaming}
+                                    message={message}
+                                    conversationId={selectedConversation?.id || ""}
+                                />
+                                {featureFlags.artifacts &&
+                                    <ArtifactsBlock
+                                        message={message}
+                                        messageIndex={messageIndex}
+                                    />}
+                            </>
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
 
+                {message.role === 'user' && (
+                    <div className="ml-[45px] min-w-[40px] text-right font-bold">
+                        {getIcon()}
+                    </div>
+                )}
+
+                {!isEditing && (
+                    <div
+                        className="px-3 md:-mr-8 ml-1 md:ml-0 flex flex-row gap-2 items-center justify-end">
+                        <div>
+                            {messagedCopied ? (
+                                <IconCheck
+                                    size={20}
+                                    className="text-green-500 dark:text-green-400"
+                                />
+                            ) : (
+                                <button
+                                    className={chat_icons_cn}
+                                    onClick={copyOnClick}
+                                    title="Copy Prompt"
+                                >
+                                    <IconCopy size={20}/>
+                                </button>
+                            )}
+                        </div>
+                        {!isActionResult && (
+                        <div>
+                            <button
+                                className={chat_icons_cn}
+                                onClick={() => setIsDownloadDialogVisible(true)}
+                                title="Download Prompt"
+                            >
+                                <IconDownload size={20}/>
+                            </button>
+                        </div>)
+                        }
+                        <div>
+                            <button
+                                className={chat_icons_cn}
+                                onClick={toggleEditing}
+                                title="Edit Prompt"
+                            >
+                                <IconEdit size={20}/>
+                            </button>
+                        </div>
+                        <button
+                            className={chat_icons_cn}
+                            onClick={() => handleForkConversation(messageIndex)}
+                            title="Branch Into New Conversation"
+                        >
+                            <IconArrowFork size={20}/>
+                        </button>
+                        {!isActionResult && (
+                        <div>
+                            <button
+                                className={chat_icons_cn}
+                                onClick={handleDeleteMessage}
+                                title="Delete Prompt"
+                            >
+                                <IconTrash size={20}/>
+                            </button>
+                        </div>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

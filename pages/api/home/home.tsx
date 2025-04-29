@@ -1530,7 +1530,7 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
     const chatEndpoint = process.env.CHAT_ENDPOINT;
-    const mixPanelToken = process.env.MIXPANEL_TOKEN;
+    const mixPanelToken = process.env.MIXPANEL_TOKEN ?? null;
     const cognitoClientId = process.env.COGNITO_CLIENT_ID;
     const cognitoDomain = process.env.COGNITO_DOMAIN;
     
