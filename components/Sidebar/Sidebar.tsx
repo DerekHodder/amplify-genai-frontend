@@ -108,7 +108,7 @@ const Sidebar = <T,>({
     <>
       <div className={`border-t border-[#D4C5B4]/20 dark:border-[#D4C5B4]/20 overflow-x-hidden h-full `}>
         <div
-          className={`fixed top-0 ${side}-0 z-40 flex h-full w-[270px] flex-none flex-col space-y-2 bg-[#F9F5F2]/90 dark:bg-[#8B7355] p-2 text-[14px] transition-all sm:relative sm:top-0 `}
+          className={`fixed top-0 ${side}-0 z-40 flex h-full w-[270px] flex-none flex-col bg-[#F9F5F2]/90 dark:bg-[#8B7355] p-2 text-[14px] transition-all sm:relative sm:top-0 `}
         >
           <div className="flex items-center">
             {addButtonForSide(side)}
@@ -128,12 +128,14 @@ const Sidebar = <T,>({
             paddingY="py-3"
           />
 
-          <KebabMenu
-          label={side === 'left' ? "Conversations": "Prompts"} 
-          items={items}
-          handleSearchTerm={handleSearchTerm}
-          setFolderSort={setFolderSort}
-          />
+          <div className="gap-2 flex flex-col">
+            <KebabMenu
+              label={side === 'left' ? "Conversations": "Prompts"} 
+              items={items}
+              handleSearchTerm={handleSearchTerm}
+              setFolderSort={setFolderSort}
+            />
+          </div>
           <div className="relative flex-grow overflow-y-auto w-[268px] border-r border-[#D4C5B4]/20 dark:border-[#D4C5B4]/20">
             {items?.length > 0 && (
               <div className="flex border-b border-[#D4C5B4]/20 dark:border-[#D4C5B4]/20 pb-2">

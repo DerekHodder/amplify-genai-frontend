@@ -121,13 +121,13 @@ export const TabSidebar: React.FC<TabSidebarProps> = ({ side, children, footerCo
 
     return isOpen ? (
         
-        <div className={`fixed top-0 ${side}-0 flex h-full w-[280px] flex-none ${chatSide()? 'border-r border-[#8B7355]/20 dark:border-r-[#8B7355]/20' : 'border-l border-[#8B7355]/20 dark:border-l-[#8B7355]/20'}
-            flex-col space-y-0 bg-[#F9F5F2]/90 dark:bg-[#8B7355]/10 text-[14px] sm:relative sm:top-0`} 
+        <div className={`fixed top-0 ${side}-0 flex h-full w-[280px] flex-none ${chatSide()? 'border-r border-[#8B7355]/20 dark:border-r-[#8B7355]/20' : 'border-l border-[#8B7355]/20 dark:border-l-[#8B7355]/20'} flex-col space-y-0 bg-[#F9F5F2]/90 dark:bg-[#8B7355]/10 text-[14px] sm:relative sm:top-0`} 
             style={{
                 zIndex: '20 !important'
               }}>
             {isMultipleTabs && (
-                <div className="flex flex-row !m-0 !p-0 w-full bg-[#F9F5F2]/90 dark:bg-[#8B7355]/10 border-b border-[#8B7355]/20 dark:border-[#8B7355]/20">
+                <>
+                  <div className="flex flex-row !m-0 !p-0 w-full bg-[#F9F5F2]/90 dark:bg-[#8B7355]/10">
                     {childrenArray.map((child, index) => (
                         <button
                             key={index}
@@ -143,12 +143,14 @@ export const TabSidebar: React.FC<TabSidebarProps> = ({ side, children, footerCo
                             </div>
                         </button>
                     ))}
-                </div>
+                  </div>
+                  <div className="w-full border-b border-[#D4C5B4]/20 dark:border-[#D4C5B4]/20"></div>
+                </>
             )}
-            <div className="overflow-auto !bg-[#F9F5F2]/90 dark:!bg-[#8B7355]/10 !p-0 !m-0 flex-grow border-r border-[#8B7355]/20 dark:border-[#8B7355]/20">
+            <div className="overflow-auto !bg-[#F9F5F2]/90 dark:!bg-[#8B7355]/10 !p-0 !m-0 flex-grow">
                 {childrenArray[activeTab].props.children}
             </div>
-            <div className="w-full mt-auto !p-2 !bg-[#F9F5F2]/90 dark:!bg-[#8B7355]/10 border-t border-[#8B7355]/20 dark:border-[#8B7355]/20">
+            <div className="w-full mt-auto !p-0 bg-transparent border-0 shadow-none">
                 {footerComponent}
             </div>
             <CloseSidebarButton onClick={toggleOpen} side={side} />

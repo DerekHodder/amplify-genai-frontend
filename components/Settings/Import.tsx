@@ -10,9 +10,10 @@ import React from 'react';
 
 interface Props {
   onImport: (data: SupportedExportFormats) => void;
+  className?: string;
 }
 
-export const Import: FC<Props> = ({ onImport }) => {
+export const Import: FC<Props> = ({ onImport, className }) => {
   const { t } = useTranslation('sidebar');
   return (
     <>
@@ -46,6 +47,7 @@ export const Import: FC<Props> = ({ onImport }) => {
             importFile.click();
           }
         }}
+        className={className}
       />
     </>
   );

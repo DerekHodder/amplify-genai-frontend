@@ -87,13 +87,13 @@ interface Props {
             
                         <div
                         ref={modalRef}
-                        className={`inline-block transform rounded-lg border border-gray-300 dark:border-neutral-600 bg-neutral-100 pb-4 text-left align-bottom shadow-xl transition-all dark:bg-[#2b2c36] sm:my-8 py-4 px-6 sm:align-middle`}
+                        className={`inline-block transform rounded-lg border border-[#8B7355] bg-white pb-4 text-left align-bottom shadow-[0_2px_4px_rgba(210,180,140,0.15)] transition-all sm:my-8 py-4 px-6 sm:align-middle`}
                         style={{width: `${innderWindow.width}px`, height: `${innderWindow.height}px`}}
                         role="dialog"  
                         >
 
                         <div className='flex flex-row'>
-                        <div className="text-xl pb-4 font-bold text-black dark:text-neutral-200">
+                        <div className="text-xl pb-4 font-bold text-black">
                             {title && <>{title}</>}
                             </div>
                             { showClose && 
@@ -122,7 +122,7 @@ interface Props {
                             <button key={index}
                               type="button"
                               disabled={option.isDisabled}
-                              className="w-full px-4 py-2 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-200 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 bg-neutral-100 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
+                              className="w-full px-4 py-2 border rounded-lg shadow border-[#E9DED3] text-black hover:bg-[#F5E6C8] focus:outline-none bg-white"
                               onClick={option.handleClick}
                               style={{cursor: option.isDisabled ? "not-allowed" : "pointer", opacity: option.isDisabled ? 0.4 : 1}}
                               >

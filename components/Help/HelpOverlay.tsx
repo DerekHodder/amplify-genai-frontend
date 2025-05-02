@@ -10,17 +10,17 @@ const HelpOverlay: React.FC<HelpOverlayProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative w-full max-w-2xl rounded-lg bg-white p-6 dark:bg-[#202123] m-4">
+      <div className="relative w-full max-w-2xl rounded-lg bg-white p-6 m-4 border border-[#8B7355] shadow-[0_2px_4px_rgba(210,180,140,0.15)]">
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          className="absolute right-4 top-4 text-black hover:text-gray-700"
         >
           ✕
         </button>
         <div className="mt-2">
-          <h2 className="text-xl font-semibold mb-4 dark:text-white">Help & Resources</h2>
+          <h2 className="text-xl font-semibold mb-4 text-black">Help & Resources</h2>
           
-          <div className="space-y-6 text-gray-600 dark:text-gray-300 max-h-[70vh] overflow-y-auto">
+          <div className="space-y-6 text-black max-h-[70vh] overflow-y-auto">
             <div>
               <h3 className="font-medium text-lg mb-2">Getting Started</h3>
               <p>Welcome to the Concert Program Interface! Here you can manage and organize your concert programs.</p>
@@ -97,7 +97,7 @@ const HelpOverlay: React.FC<HelpOverlayProps> = ({ isOpen, onClose }) => {
                 Contact us at{' '}
                 <a
                   href="mailto:amplify@vanderbilt.edu"
-                  className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
+                  className="text-blue-500 hover:text-blue-600"
                 >
                   amplify@vanderbilt.edu
                 </a>

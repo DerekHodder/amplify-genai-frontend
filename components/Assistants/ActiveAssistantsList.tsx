@@ -1,5 +1,5 @@
 import React, {FC, useContext, useEffect, useRef, useState} from 'react';
-import {IconRobot} from '@tabler/icons-react';
+import {IconRobot, IconPencil, IconCopy, IconShare, IconEye, IconTrash} from '@tabler/icons-react';
 import 'react-circular-progressbar/dist/styles.css';
 import styled, {keyframes} from "styled-components";
 import {FiCommand} from "react-icons/fi";
@@ -113,14 +113,22 @@ export const ActiveAssistantsList: FC<Props> = ({}) => {
                             onClick={()=>{
                                 handleSelectAssistant(assistant);
                             }}
-                            className="flex flex-row items-center justify-center text-black hover:opacity-50 mt-6 dark:text-white dark:border-neutral-600 gap-3 py-2 px-4 dark:bg-[#343541] md:mb-0 md:mt-2 rounded border border-neutral-200 bg-white">
-
+                            className="flex flex-col items-start justify-center text-black hover:opacity-50 mt-6 dark:text-white dark:border-neutral-600 gap-1 py-2 px-4 dark:bg-[#343541] md:mb-0 md:mt-2 rounded border border-neutral-200 bg-white">
+                            <div className="flex flex-row items-center w-full justify-between">
                                 <IconRobot size={16}/>
                                 <button key={index}
-                                        className="flex w-full items-center"
+                                        className="flex-1 ml-2 truncate overflow-hidden whitespace-nowrap text-ellipsis text-left"
                                 >
                                     {assistant.definition.name.slice(0, 100)}
                                 </button>
+                            </div>
+                            <div className="flex flex-row gap-2 mt-1 min-h-[24px] w-full">
+                                <button title="Edit" onClick={e => {e.stopPropagation(); /* TODO: edit handler */}}><IconPencil size={16} /></button>
+                                <button title="Copy" onClick={e => {e.stopPropagation(); /* TODO: copy handler */}}><IconCopy size={16} /></button>
+                                <button title="Share" onClick={e => {e.stopPropagation(); /* TODO: share handler */}}><IconShare size={16} /></button>
+                                <button title="View" onClick={e => {e.stopPropagation(); /* TODO: view handler */}}><IconEye size={16} /></button>
+                                <button title="Delete" onClick={e => {e.stopPropagation(); /* TODO: delete handler */}}><IconTrash size={16} /></button>
+                            </div>
                         </div>
                     ))}
                 </div>

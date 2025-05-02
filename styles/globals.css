@@ -42,16 +42,16 @@ Header > div {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: #E9DED3;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #ccc;
+  background-color: #8B7355;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #aaa;
+  background-color: #6B5B3A;
 }
 
 ::-webkit-scrollbar-track:hover {
@@ -108,4 +108,26 @@ pre:has(div.codeblock) {
   .chat-button-blue-color {
     color: #8edffa; 
   }
+}
+
+/* Consistent icon hover effect: all icons darken on hover, overriding other hovers */
+.icon:hover, [class^="Icon"]:hover, [class*=" Icon"]:hover,
+.icon:hover svg, [class^="Icon"]:hover svg, [class*=" Icon"]:hover svg {
+  filter: brightness(0.7) !important;
+  color: #6B5642 !important;
+  transition: filter 0.15s, color 0.15s;
+}
+
+svg, .icon, [class^="Icon"], [class*=" Icon"] {
+  color: #8B7355 !important;
+  transition: color 0.15s;
+}
+
+svg:hover, .icon:hover, [class^="Icon"]:hover, [class*=" Icon"]:hover,
+svg:hover svg, .icon:hover svg, [class^="Icon"]:hover svg, [class*=" Icon"]:hover svg {
+  color: #6B5B3A !important;
+}
+
+hr, .border, .border-b, .border-t, .border-l, .border-r, table, th, td, input, textarea, select, .outline {
+  border-color: #8B7355 !important;
 }

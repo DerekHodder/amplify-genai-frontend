@@ -49,11 +49,8 @@ export const ChatbarSettings = () => {
     } = useContext(ChatbarContext);
 
     return (
-        <div className="flex flex-col items-center space-y-0 m-0 p-0 border-t border-[#8B7355] dark:border-[#D4C5B4] pt-1 text-sm">
-            {/*{conversations.length > 0 ? (*/}
-            {/*    <ClearConversations onClearConversations={handleClearConversations}/>*/}
-            {/*) : null}*/}
-
+        <div className="flex flex-col items-center m-0 p-0 border-t border-[#8B7355] dark:border-[#D4C5B4] pt-1 text-sm">
+          <div className="flex flex-col gap-2 w-full px-2">
             <SidebarButton
                 text={t('Manage Accounts')}
                 icon={<IconUser size={18} />}
@@ -61,6 +58,7 @@ export const ChatbarSettings = () => {
                     //statsService.setThemeEvent();
                     setIsAccountDialogVisible(true)
                 }}
+                className="w-[97%] self-start"
             />
 
             {featureFlags.assistantAdminInterface && 
@@ -72,6 +70,7 @@ export const ChatbarSettings = () => {
                         window.dispatchEvent(new CustomEvent('openAstAdminInterfaceTrigger', { detail: { isOpen: true }} ));
                       
                     }}
+                    className="w-[97%] self-start"
                 />
             }
 
@@ -84,10 +83,11 @@ export const ChatbarSettings = () => {
                         window.dispatchEvent(new CustomEvent('openAdminInterfaceTrigger', { detail: { isOpen: true }} ));
                       
                     }}
+                    className="w-[97%] self-start"
                 />
             }
 
-            <Import onImport={handleImportConversations} />
+            <Import onImport={handleImportConversations} className="w-[97%] self-start" />
 
             {/*<ImportFromUrl onImport={handleImportConversations}/>*/}
 
@@ -99,6 +99,7 @@ export const ChatbarSettings = () => {
                     toast("Preparing Conversation Export...");
                     handleExportData();
                 }}
+                className="w-[97%] self-start"
             />
             
             <SidebarButton
@@ -108,6 +109,7 @@ export const ChatbarSettings = () => {
                     //statsService.setThemeEvent();
                     setIsSettingDialog(true)
                 }}
+                className="w-[97%] self-start"
             />
 
             {featureFlags.integrations && 
@@ -115,6 +117,7 @@ export const ChatbarSettings = () => {
               text={t('Integrations')}
               icon={<IconBinaryTree2 size={18} />}
               onClick={() => setIsIntegrationsOpen(true)}
+              className="w-[97%] self-start"
             />}
 
             {featureFlags.memory && settingRef.current?.featureOptions.includeMemory && (
@@ -122,6 +125,7 @@ export const ChatbarSettings = () => {
                     text={t('Memory')}
                     icon={<IconDeviceSdCard size={18} />}
                     onClick={() => setIsMemoryDialogOpen(true)}
+                    className="w-[97%] self-start"
                 />
             )}
 
@@ -129,7 +133,9 @@ export const ChatbarSettings = () => {
                 text={t('Send Feedback')}
                 icon={<IconHelp size={18} />}
                 onClick={() => window.location.href = 'mailto:amplify@vanderbilt.edu'}
+                className="w-[97%] self-start"
             />
+          </div>
 
             <IntegrationsDialog open={isIntegrationsOpen} onClose={()=>{setIsIntegrationsOpen(false)}}/>
 

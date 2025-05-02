@@ -162,7 +162,7 @@ const FeaturePlugin = ({ plugins, setPlugins }: Props) => {
                 {!showPluginSelect && 
                 <button // \nNote: You will not be able to use at the same time as a selected Assistant
                     title={`${!codeInterpreterEnabled() ? "Select Enabled Features" : codeInterpreterPlugin?.name}`}
-                    className="p-1.5 text-[#8B7355] bg-white hover:bg-[#E9DED3] hover:text-[#6B5642] dark:bg-neutral-600 dark:text-[#8B7355] dark:hover:bg-[#8B7355] dark:hover:text-white"
+                    className="p-1.5 text-[#8B7355] hover:text-[#6B5642] dark:text-[#8B7355] dark:hover:text-white"
                     style={{
                         cursor: isDragging? "grabbing": "pointer",
                         borderRadius: '50%',
@@ -172,7 +172,7 @@ const FeaturePlugin = ({ plugins, setPlugins }: Props) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         boxShadow: '0 8px 16px rgba(139, 115, 85, 0.3)',
-                        border: `${codeInterpreterEnabled() ? '1px solid #00ff00' : 'none'}`, 
+                        border: `${codeInterpreterEnabled() ? '1px solid #00ff00' : 'none'}`,
                         transition: 'all 0.7s ease' 
                     }}
                     onClick={() => {if ( startPosition === positionRef.current ) setShowPluginSelect(!showPluginSelect)}

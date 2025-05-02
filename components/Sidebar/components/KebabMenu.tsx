@@ -378,7 +378,7 @@ interface Props {
             {actionItem && checkIsActiveSide() && (
                 <div className="text-xs flex flex-row gap-1">
                     {`${actionItem.actionLabel}...`} 
-                    <div className="flex flex-row gap-0.5 bg-neutral-200 dark:bg-[#343541]/90 rounded">
+                    <div className="flex flex-row gap-0.5 rounded">
                          <button 
                                 className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100" 
                                 onClick={(e) => {

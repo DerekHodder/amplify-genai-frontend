@@ -1432,17 +1432,22 @@ const Home = ({
                             <TabSidebar
                                 side={"left"}
                                 footerComponent={
-                                    <div className="m-0 p-0 border-t border-[#C4A484] pt-1 text-sm">
-                                        <button className="text-black" title="Sign Out" onClick={() => {
-                                            const goLogout = async () => {
-                                                await federatedSignOut();
-                                            };
-                                            goLogout();
-                                        }}>
-                                            <div className="flex items-center">
-                                                <IconLogout className="m-2" />
-                                                <span>{isLoading ? 'Loading...' : getName(user?.email) ?? 'Unnamed user'}</span>
-                                            </div>
+                                    <div className="flex items-center justify-between w-full px-2 py-1 bg-transparent">
+                                        <span className="flex items-center text-black dark:text-white text-sm">
+                                            <IconLogout className="mr-2" />
+                                            {isLoading ? 'Loading...' : getName(user?.email) ?? 'Unnamed user'}
+                                        </span>
+                                        <button
+                                            className="ml-2 text-xs text-[#8B7355] dark:text-[#D4C5B4] hover:underline focus:outline-none bg-transparent border-none p-0"
+                                            title="Sign Out"
+                                            onClick={() => {
+                                                const goLogout = async () => {
+                                                    await federatedSignOut();
+                                                };
+                                                goLogout();
+                                            }}
+                                        >
+                                            Sign Out
                                         </button>
                                     </div>
                                 }

@@ -7,16 +7,16 @@ interface HelpOverlayProps {
 const HelpOverlay: React.FC<HelpOverlayProps> = ({ onClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 relative">
+      <div className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 relative border border-[#8B7355] shadow-[0_2px_4px_rgba(210,180,140,0.15)]">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          className="absolute top-4 right-4 text-black hover:text-gray-700"
           aria-label="Close help overlay"
         >
           ✕
         </button>
-        <h2 className="text-2xl font-bold mb-4">Help & Information</h2>
-        <div className="space-y-4">
+        <h2 className="text-2xl font-bold mb-4 text-black">Help & Information</h2>
+        <div className="space-y-4 text-black">
           <section>
             <h3 className="text-lg font-semibold mb-2">Getting Started</h3>
             <p>Welcome to the Concert Program Interface! Here you can manage and organize your concert programs.</p>

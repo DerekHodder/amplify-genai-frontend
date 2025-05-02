@@ -199,32 +199,22 @@ export const PromptComponent = ({ prompt }: Props) => {
     // @ts-ignore
     // @ts-ignore
     return (
-        <div className="relative flex items-center">
-            <button
-                className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-[#F9F5F2] dark:hover:bg-[#8B7355]/10 ${
-                    isDeleting ? 'bg-[#F9F5F2] dark:bg-[#8B7355]/10' : ''
-                }`}
-                draggable="true"
-                onClick={() => {
-                    if (!isDeleting && !isRenaming) {
-                        setShowModal(true);
-                    }
-                }}
-                onDragStart={(e) => handleDragStart(e, prompt)}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-            >
-                <div className="text-[#8B7355] dark:text-[#D4C5B4]">
-                    {getIcon(prompt)}
+        <div className="relative flex items-center mb-3"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <div className="flex flex-col flex-1 min-w-0">
+                <div className="flex flex-row items-center w-full">
+                    <div className="text-[#8B7355] dark:text-[#D4C5B4]">
+                        {getIcon(prompt)}
+                    </div>
+                    <div className="flex-1 ml-2 truncate overflow-hidden whitespace-nowrap text-ellipsis text-left text-[12.5px] leading-3 !text-black dark:!text-black">
+                        {prompt.name}
+                    </div>
                 </div>
-
-                <div className="relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-3 !text-black dark:!text-black">
-                    {prompt.name}
-                </div>
-
-                {(isDeleting || isHovered || checkPrompts) && (
-                    <div className="absolute right-1 flex">
-                        {!isDeleting && !checkPrompts && (
+                {(isHovered || isDeleting) && (
+                    <div className="flex flex-row gap-2 mt-2 min-h-[24px] w-full">
+                        {!isDeleting && (
                             <>
                                 {canEdit && (
                                     <ActionButton
@@ -287,7 +277,6 @@ export const PromptComponent = ({ prompt }: Props) => {
                                 )}
                             </>
                         )}
-
                         {isDeleting && (
                             <>
                                 <ActionButton
@@ -296,7 +285,6 @@ export const PromptComponent = ({ prompt }: Props) => {
                                 >
                                     <IconCheck size={18} />
                                 </ActionButton>
-
                                 <ActionButton
                                     handleClick={handleCancelDelete}
                                     className="text-[#8B7355] dark:text-[#D4C5B4] hover:text-[#8B7355]/70 dark:hover:text-[#D4C5B4]/70"
@@ -307,7 +295,7 @@ export const PromptComponent = ({ prompt }: Props) => {
                         )}
                     </div>
                 )}
-            </button>
+            </div>
 
             {checkPrompts && (
                 <div className="absolute right-4 z-10">

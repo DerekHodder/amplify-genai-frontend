@@ -52,7 +52,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ id, label, checked, onChange
           height: 15px; 
           border-radius: 4px;
           transform: scale(1);
-          border: 1px solid #cccfdb;
+          border: 1px solid #8B7355;
           transition: all 0.2s ease;
           box-shadow: 0 1px 1px rgba(0, 16, 75, 0.05);
         }
@@ -80,8 +80,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({ id, label, checked, onChange
           visibility: hidden; /* Hide the default checkbox */
         }
         .checkbox-wrapper .inp-cbx:checked + .cbx span:first-child {
-          background: #07f;
-          border-color: #07f;
+          background: #D42121;
+          border-color: #8B7355;
           animation: wave-4 0.4s ease;
         }
         .checkbox-wrapper .inp-cbx:checked + .cbx span:first-child svg {

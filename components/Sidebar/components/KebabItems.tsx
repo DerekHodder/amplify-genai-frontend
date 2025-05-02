@@ -17,7 +17,7 @@ export const KebabItem: FC<ItemProps> = ({label, handleAction, icon, title=''}) 
         key={label}
         value={label}
         onClick={handleAction}
-        className={`w-full items-center gap-1 flex flex-row pr-1 pl-1 cursor-pointer hover:bg-white/80 dark:hover:bg-[#343541]/90`}>
+        className={`w-full items-center gap-1 flex flex-row pr-1 pl-1 cursor-pointer`}>
         <div className="text-neutral-900 dark:text-neutral-100 flex-shrink-0">{icon} </div>
          {label}
       </button>
@@ -66,7 +66,7 @@ export const KebabActionItem: FC<ActionProps> = ({label, type, handleAction, set
 
 
   return (
-    <div className="min-w-[72px] flex items-center gap-1 flex-row pr-1 pl-1 cursor-pointer border-b dark:border-white/20 hover:bg-neutral-200 dark:hover:bg-[#343541]/90"
+    <div className="min-w-[72px] flex items-center gap-1 flex-row pr-1 pl-1 cursor-pointer border-b dark:border-white/20"
       title={`${label} ${type.includes('Folders') ? "Entire Folder" : type}`}>
     
       <div className="text-neutral-900 dark:text-neutral-100">{icon}</div>
@@ -100,7 +100,7 @@ export const KebabMenuItems: FC<MenuItemsProps> = ({ label, xShift=220, minWidth
   
   return (
     <div
-    className={`pr-1 pl-1 border-b dark:border-white/20 cursor-pointer dark:border-white/20 hover:bg-white/80 dark:hover:bg-[#343541]/90 flex w-full items-center `}
+    className={`pr-1 pl-1 border-b dark:border-white/20 cursor-pointer dark:border-white/20 flex w-full items-center `}
       onMouseEnter={() => setIsSubMenuVisible(true)}
       onMouseLeave={() => setIsSubMenuVisible(false)}
     >
