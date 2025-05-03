@@ -1450,7 +1450,7 @@ export const AssistantAdminUI: FC<Props> = ({ open, openToGroup, openToAssistant
                             { selectedGroup && 
                             <>
                                 <div key={`${selectedGroup?.id}_Assistants`}>
-                                    <div className="mb-4 flex flex-row items-center justify-between bg-transparent rounded-t border-b border-neutral-400  dark:border-white/20">
+                                    <div className="mb-4 flex flex-row items-center justify-between bg-transparent rounded-t border-b border-neutral-400  dark:border-white/20 gap-3 mt-1" style={{ marginBottom: '2rem' }}>
                                         {selectedGroup.assistants.length === 0 && <label className='text-center text-black dark:text-white text-lg'
                                                                                     style={{width: `${innderWindow.width * 0.75}px`}}>
                                                                                    You currently do not have any assistants in this group. </label>}

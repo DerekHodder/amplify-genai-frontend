@@ -110,13 +110,13 @@ const ChatContentBlock: React.FC<Props> = (
 //   console.log(transformedMessageContent)
   
     return (
-    <div className="chatContentBlock w-full overflow-x-auto" 
+    <div className="chatContentBlock w-full overflow-x-hidden" 
          style={{maxWidth: windowInnerWidth}}
          data-message-index={messageIndex}
          data-original-content={transformedMessageContent}>
     <MemoizedReactMarkdown
     key={renderKey}
-    className="prose dark:prose-invert flex-1 max-w-none w-full" 
+    className="prose dark:prose-invert flex-1 max-w-none w-full break-words" 
     remarkPlugins={[remarkGfm, remarkMath]}
     //onMouseUp={handleTextHighlight}
     //rehypePlugins={[rehypeRaw]}

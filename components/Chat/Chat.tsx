@@ -966,13 +966,19 @@ export const Chat = memo(({stopConversationRef}: Props) => {
                 }} 
                 />
             }
-            <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
+            <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541] w-full">
                 { modelError ? (
                     <ErrorMessageDiv error={modelError}/>  
                 ) : (
                     <>
                         <div
-                            className="chatcontainer max-h-full overflow-x-hidden" style={{height: windowInnerDims.height * 0.94}}
+                            className="chatcontainer max-h-full overflow-x-hidden overflow-y-auto w-full" 
+                            style={{
+                                height: windowInnerDims.height * 0.94,
+                                width: '100%',
+                                maxWidth: '100%',
+                                position: 'relative'
+                            }}
                             ref={chatContainerRef}
                             onScroll={handleScroll}
                         >
@@ -980,7 +986,11 @@ export const Chat = memo(({stopConversationRef}: Props) => {
                                 <>
                                     <div
                                         className="mx-auto flex flex-col space-y-1 md:space-y-8 px-3 pt-5 md:pt-10" 
-                                        style={{width: windowInnerDims.width * 0.45}}>
+                                        style={{
+                                            width: '100%',
+                                            maxWidth: windowInnerDims.width * 0.45,
+                                            overflow: 'hidden'
+                                        }}>
                                         <div
                                             className="text-center text-3xl font-semibold text-black dark:text-white">
                                             {filteredModels.length === 0 ? (

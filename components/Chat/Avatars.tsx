@@ -1,15 +1,12 @@
 import { useSession } from "next-auth/react";
 
-
-
 export const User: React.FC = () => {
     const { data: session } = useSession();
     const userEmail = session?.user?.email;
     const userInitial = userEmail ? userEmail.charAt(0).toUpperCase() : "A";
 
     return (
-        <div className="relative left-[-12px] flex items-center justify-center" style={{ width: '50px', height: '50px' }}>
-            
+        <div className="relative flex items-center justify-center" style={{ width: '50px', height: '50px' }}>
             <svg width="100" height="100" viewBox="0 0 100 100">
                 <defs>
                     <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -26,10 +23,9 @@ export const User: React.FC = () => {
 
             {/* Initials Label in the bottom-left corner */}
             <span
-                className="text-gray-800 dark:text-[#B0BEC5] absolute text-[20px] pr-1 bg-transparent"
+                className="text-gray-800 dark:text-[#B0BEC5] absolute text-[20px] bg-transparent text-center w-[50px]"
                 style={{
                     bottom: '12px',
-                    left: userInitial === "I" ? "23px" : '19px',
                     fontFamily: 'Open Sans, sans-serif',
                     fontWeight: 300
                 }}
@@ -40,16 +36,9 @@ export const User: React.FC = () => {
     );
 };
 
-
-
-
-
-
 export const Amplify: React.FC = () => {
-
     return (
-        <div className="relative left-[-12px] flex items-center justify-center" style={{ width: '50px', height: '50px' }}>
-            
+        <div className="relative flex items-center justify-center" style={{ width: '50px', height: '50px' }}>
             <svg width="100" height="100" viewBox="0 0 100 100">
                 <defs>
                     <linearGradient id="circleGradientAmp" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -58,8 +47,6 @@ export const Amplify: React.FC = () => {
                         <stop offset="50%" stopColor="#4D9DE0" /> {/* Lighter blue */}
                         <stop offset="76%" stopColor="#00346f" /> {/* Dark blue */}
                         <stop offset="100%" stopColor="#ae34ff" /> {/* Purple */}
-
-
                     </linearGradient>
                 </defs>
                 <circle cx="50" cy="50" r="50" fill="none" stroke="url(#circleGradientAmp)" strokeWidth="4" strokeDasharray="120 40" />
@@ -68,7 +55,7 @@ export const Amplify: React.FC = () => {
 
             {/* Initials Label in the bottom-left corner */}
             <span
-                className="bg-gray-50 dark:bg-[#444654] text-gray-800 dark:text-[#B0BEC5] absolute text-[16px] w-[60px] pr-1 "
+                className="bg-gray-50 dark:bg-[#444654] text-gray-800 dark:text-[#B0BEC5] absolute text-[16px] w-[50px] text-center"
                 style={{
                     bottom: '12px',
                     fontFamily: 'Open Sans, sans-serif',

@@ -69,6 +69,11 @@ Header > div {
 
 html {
   background: #202123;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 @media (max-width: 720px) {
