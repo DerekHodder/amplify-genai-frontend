@@ -40,7 +40,7 @@ export const ActiveTabs: FC<Props> = ({tabs, width}) => {
     return ( 
         <div ref={tabRef} className="flex flex-col gap-2"
         style={{width: innerWidth}}>
-            <div className="z-50 fixed flex flex-row gap-1 rounded-t border-b dark:border-white/20 bg-neutral-100 dark:bg-[#2b2c36]"
+            <div className="z-50 fixed flex flex-row gap-1 rounded-t border-b border-[#8B7355] bg-white"
               style={{width: innerWidth * 0.98, overflowY: 'auto'}}>
                     {tabs.map((tab: tab, index: number) => 
                         <button
@@ -50,7 +50,7 @@ export const ActiveTabs: FC<Props> = ({tabs, width}) => {
                                 setActiveTab(index);
                                 if (tabRef && tabRef.current) tabRef.current.scrollIntoView({ block: 'start' });
                             }}
-                            className={`p-2 rounded-t flex flex-shrink-0 ${activeTab === index ? 'border-l border-t border-r dark:border-gray-500 dark:text-white  shadow-[1px_0_1px_rgba(0,0,0,0.1),-1px_0_1px_rgba(0,0,0,0.1)] dark:shadow-[1px_0_3px_rgba(0,0,0,0.3),-1px_0_3px_rgba(0,0,0,0.3)]' : 'text-gray-400 dark:text-gray-600'}`}>
+                            className={`p-2 rounded-t flex flex-shrink-0 ${activeTab === index ? 'border-l border-t border-r border-[#8B7355] text-[#B91C1C] bg-white' : 'text-[#8B7355] bg-white'}`}>
                             <h3 className="text-xl">{tab.label}</h3> 
                         </button>
                     

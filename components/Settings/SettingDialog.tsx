@@ -190,11 +190,11 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
 const modelLabel = (modelId: string, name: string) => {
   const isVisible = !hiddenModelIds.includes(modelId);
   const isDisabled = modelId === defaultModelId;
-  return <div key={modelId} className={` text-sm ${isVisible ? "text-blue-600":""}`}> 
+  return <div key={modelId} className={` text-sm ${isVisible ? "text-[#B91C1C]" : ""}`}> 
           <button
             disabled={isDisabled}
             title={isDisabled? "Default model can't be hidden": `${isVisible ? "Hide" : "Show"} model from selection menus`}
-            className={`p-1 ${!isDisabled ? "hover:opacity-70":""} whitespace-nowrap overflow-hidden text-ellipsis`}
+            className={`p-1 ${!isDisabled ? "hover:opacity-70": ""} whitespace-nowrap overflow-hidden text-ellipsis`}
             onClick={()=>{
               if (isVisible) {
                 setHiddenModelIds([...hiddenModelIds, modelId]);
@@ -225,6 +225,7 @@ const modelLabel = (modelId: string, name: string) => {
       submitLabel={"Save"}
       disableSubmit={!hasUnsavedChanges}
       content={
+        <div className="text-black dark:text-neutral-200">
         <ActiveTabs
             width={() => window.innerWidth * 0.58}
             tabs={[
@@ -277,15 +278,15 @@ const modelLabel = (modelId: string, name: string) => {
                               </div>
                               
                               <div className='flex flex-row w-full'>
-                                    <label className='ml-5 mt-[12px] text-[0.75rem]'>Include All</label>
+                                    <label className='ml-5 mt-[12px] text-[0.75rem] text-[#8B7355]'>Include All</label>
                                     <div className='flex-grow'>
-                                      <div className='flex flex-col text-center mt-[-4px]'> Available Models 
-                                          <label className='ml-2 text-xs mb-2 mt-[-4px]'>{"(Displayed models are shown in blue)"}</label>
+                                      <div className='flex flex-col text-center mt-[-4px] text-[#8B7355]'> Available Models 
+                                          <label className='ml-2 text-xs mb-2 mt-[-4px] text-[#8B7355]'>{"(Displayed models are shown in red)"}</label>
                                       </div>
                                     </div> 
                               </div>      
                               <div className='flex flex-row pr-8'>
-                                <div className='w-[100px] border border-gray-300 mr-[-1px] mt-[-2px] dark:border-neutral-700 px-2'>
+                                <div className='w-[100px] border border-[#8B7355] mr-[-1px] mt-[-2px] dark:border-[#8B7355] px-2'>
                                   <div className='mt-1'>
                                     <FlagsMap 
                                       id={'modelOptionFlags'}
@@ -306,7 +307,7 @@ const modelLabel = (modelId: string, name: string) => {
                                             {modelsArray.map((m: { id: string; name: string }) => (
                                               <td
                                                 key={m.id}
-                                                className="border border-gray-300 dark:border-neutral-700 px-4"
+                                                className="border border-[#8B7355] dark:border-[#8B7355] px-4"
                                               >
                                                 {modelLabel(m.id, m.name)}
                                               </td>
@@ -358,6 +359,7 @@ const modelLabel = (modelId: string, name: string) => {
                         }] : [])
                     ]}
       />
+      </div>
       }
     />
                 

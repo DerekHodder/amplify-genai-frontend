@@ -257,7 +257,7 @@ const SharedItemsList: FC<{}> = () => {
                             >
                                 <IconShare size={18} className="ml-2 flex-shrink-0 text-[#8B7355] dark:text-[#8B7355]"/>
                                 <div className="text-left text-[12.5px] leading-3 pr-1">
-                                    <div className="mb-1 text-[#D4C4B7] dark:text-[#D4C4B7]">{new Date(item.sharedAt).toLocaleString()}</div>
+                                    <div className="mb-1 text-black dark:text-black">{new Date(item.sharedAt).toLocaleString()}</div>
                                     <div
                                         className="relative text-left text-[12.5px] leading-3 pr-1 text-black dark:text-black"
                                         style={{wordBreak: "break-word", whiteSpace: "pre-line"}}
