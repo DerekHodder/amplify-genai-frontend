@@ -225,7 +225,7 @@ export const ConversationComponent = ({ conversation}: Props) => {
                                                 </div>}
           </div>
 
-          <div className="relative flex-1 text-left text-[12.5px] leading-3 !text-black dark:!text-black overflow-hidden whitespace-nowrap text-ellipsis max-w-[140px]">
+          <div className="relative flex-1 text-left text-[12.5px] leading-[1.4] py-1 !text-black dark:!text-black overflow-hidden whitespace-nowrap text-ellipsis max-w-[140px]">
             {conversation.name}
           </div>
 

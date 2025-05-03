@@ -69,7 +69,7 @@ export const ArtifactPreview: React.FC<Props> = ({ codeBlocks, artifactContent, 
           <head>
             <style>
               body {
-                font-family: 'Arial', sans-serif;
+                font-family: 'Inter', sans-serif;
                 background-color: #f8f8f8;
                 padding: 20px;
                 color: #333; 
@@ -728,7 +728,7 @@ export const environment = {
   
   <style>
   #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   </style>
         `.trim(),

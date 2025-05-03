@@ -26,7 +26,7 @@ export const User: React.FC = () => {
                 className="text-gray-800 dark:text-[#B0BEC5] absolute text-[20px] bg-transparent text-center w-[50px]"
                 style={{
                     bottom: '12px',
-                    fontFamily: 'Open Sans, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 300
                 }}
             >
@@ -53,16 +53,17 @@ export const Amplify: React.FC = () => {
                 <circle cx="50" cy="50" r="40" fill="none" stroke="url(#circleGradientAmp)" strokeWidth="2" strokeDasharray="110 40" />
             </svg>
 
-            {/* Initials Label in the bottom-left corner */}
+            {/* Centered A Label */}
             <span
-                className="bg-gray-50 dark:bg-[#444654] text-gray-800 dark:text-[#B0BEC5] absolute text-[16px] w-[50px] text-center"
+                className="text-gray-800 dark:text-[#B0BEC5] absolute text-[20px] bg-transparent text-center w-[50px] flex items-center justify-center h-[50px]"
                 style={{
-                    bottom: '12px',
-                    fontFamily: 'Open Sans, sans-serif',
-                    fontWeight: 300
+                    fontFamily: 'Libre Caslon Text, serif',
+                    fontWeight: 300,
+                    left: 0,
+                    top: 0
                 }}
             >
-                Amplify
+                A
             </span>
         </div>
     );

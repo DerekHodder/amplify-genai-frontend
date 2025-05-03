@@ -163,7 +163,7 @@ const Mermaid: React.FC<MermaidProps> = ({ chart, currentMessage }) => {
 
             const showLoading = () => {
                 if (!messageIsStreaming) {
-                    setSvgDataUrl("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\"><text x=\"0\" y=\"100\" font-size=\"12\" font-family='sans-serif'>Loading...</text></svg>")
+                    setSvgDataUrl("data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"600\"><text x=\"0\" y=\"100\" font-size=\"12\" font-family='Inter, sans-serif'>Loading...</text></svg>")
                 }
             };
 
@@ -216,7 +216,7 @@ const Mermaid: React.FC<MermaidProps> = ({ chart, currentMessage }) => {
             <div style={{ height: `${height + 20}px`, width: `${2 * height}px`, overflow: "auto" }}>
                 {messageIsStreaming && currentMessage ? <div><LoadingIcon /> Loading...</div> :
                     <img style={{ height: `${height}px` }}
-                        src={svgDataUrl || "data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"80\"><text x=\"0\" y=\"30\" font-size=\"18\" font-family='sans-serif' font-weight=\"bold\" fill=\"white\">Loading...</text></svg>"}
+                        src={svgDataUrl || "data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"80\"><text x=\"0\" y=\"30\" font-size=\"18\" font-family='Inter, sans-serif' font-weight=\"bold\" fill=\"white\">Loading...</text></svg>"}
                         alt="Loading" />
                 }
             </div>
