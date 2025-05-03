@@ -54,6 +54,7 @@ import { useSession } from 'next-auth/react';
 import { doGetProjectsOp, doReadMemoryOp, doEditMemoryOp, doRemoveMemoryOp, doEditProjectOp, doRemoveProjectOp } from '../../services/memoryService';
 import { ProjectInUse } from './ProjectInUse';
 import { Settings } from '@/types/settings';
+import HelpOverlay from '../Help/HelpOverlay';
 
 interface Props {
     onSend: (message: Message, documents: AttachedDocument[]) => void;
@@ -660,9 +661,11 @@ const onAssistantChange = (assistant: Assistant) => {
         if (selectedAssistant !== DEFAULT_ASSISTANT) setPlugins(plugins.filter((p: Plugin) => p.id !== PluginID.CODE_INTERPRETER ));
       }, [selectedAssistant]);
 
+    const [isHelpOpen, setIsHelpOpen] = useState(false);
 
     return (
         <>
+        <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
         { featureFlags.pluginsOnInput &&
           settingRef.current.featureOptions.includePluginSelector &&
             <div className='relative z-20' style={{height: 0}}>
@@ -958,6 +961,17 @@ const onAssistantChange = (assistant: Assistant) => {
                             title="Select Assistants"
                         >
                             <IconAt size={20}/>
+                        </button>
+
+                        {/* Help Button */}
+                        <button
+                            className="flex flex-shrink-0 items-center justify-center w-7 h-7 rounded-full bg-red-500 hover:bg-red-600 text-white transition-colors duration-200"
+                            style={{ marginLeft: '4px' }}
+                            onClick={() => setIsHelpOpen(true)}
+                            title="Help"
+                            aria-label="Help"
+                        >
+                            <span className="font-bold text-base align-middle">?</span>
                         </button>
 
                         {showAssistantSelect && (
