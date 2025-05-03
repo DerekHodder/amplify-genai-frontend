@@ -928,21 +928,7 @@ const onAssistantChange = (assistant: Assistant) => {
                 
                 <div className="h-6 w-full flex flex-row gap-2 items-center ">
 
-                {featureFlags.dataSourceSelectorOnInput && (
-                        <button
-                            className={buttonClasses}
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setShowDataSourceSelector(!showDataSourceSelector);
-                                setIsFactsVisible(false);
-                            }}
-                            onKeyDown={(e) => {
-                            }}
-                            title="Files"
-                        >
-                            <IconFiles size={20}/>
-                        </button>
-                    )}
+                {/* Removed IconFiles button as requested */}
 
 
 

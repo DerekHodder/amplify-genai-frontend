@@ -1,4 +1,4 @@
-import { IconExternalLink } from '@tabler/icons-react';
+import { IconExternalLink, IconCloud } from '@tabler/icons-react';
 import { useContext, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -8,6 +8,8 @@ import { Model } from '@/types/model';
 import HomeContext from '@/pages/api/home/home.context';
 import { filterModels } from '@/utils/app/models';
 import { getSettings } from '@/utils/app/settings';
+import HelpOverlay from '@/components/Help/HelpOverlay';
+
 interface Props {
   modelId: string | undefined;
   isDisabled?: boolean;
@@ -27,6 +29,7 @@ export const ModelSelect: React.FC<Props> = ({modelId, isDisabled=false, handleM
   } = useContext(HomeContext);
 
   const [selectModel, setSelectModel] = useState<string | undefined>(modelId ?? defaultModelId);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
   const models = applyModelFilter ? filterModels(availableModels, getSettings(featureFlags).hiddenModelIds) : Object.values(availableModels);
 
   useEffect(()=>{
@@ -55,9 +58,18 @@ export const ModelSelect: React.FC<Props> = ({modelId, isDisabled=false, handleM
   
   return (
     <div className="flex flex-col">
-      <label className="mb-2 text-left text-black dark:text-white">
-        {isTitled? t('Model'): ""}
-      </label>
+      <div className="flex items-center mb-2">
+        <label className="text-left text-black dark:text-white mr-2">
+          {isTitled? t('Model'): ""}
+        </label>
+        <button
+          className="flex flex-shrink-0 items-center justify-center w-6 h-6 rounded-full bg-red-500 hover:bg-red-600 text-white transition-colors duration-200 text-sm"
+          onClick={() => setIsHelpOpen(true)}
+          title="Help"
+        >
+          ?
+        </button>
+      </div>
       <div className="w-full rounded-lg border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:border-neutral-600 dark:text-white custom-shadow">
         <select
           disabled={isDisabled}
@@ -81,6 +93,7 @@ export const ModelSelect: React.FC<Props> = ({modelId, isDisabled=false, handleM
           ))}
         </select>
       </div>
+      <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
     </div>
   );
 };
