@@ -89,7 +89,7 @@ const Sidebar = <T,>({
 
     const addAssistantButton = (
       <button
-        className="text-sidebar flex w-[205px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-[#8B7355] dark:border-[#8B7355] p-3 text-black dark:text-black transition-colors duration-200 hover:bg-white/80 dark:hover:bg-[#8B7355]/10"
+        className="text-sidebar flex w-[200px] flex-shrink-0 select-none items-center gap-3 rounded-md border border-[#8B7355] dark:border-[#8B7355] p-2 text-black dark:text-black transition-colors duration-200 hover:bg-white/80 dark:hover:bg-[#8B7355]/10"
         onClick={() => {
           handleCreateAssistantItem();
           handleSearchTerm('');
@@ -101,7 +101,6 @@ const Sidebar = <T,>({
     );
 
     return addAssistantButton
-    
   }
 
   return (
@@ -110,10 +109,10 @@ const Sidebar = <T,>({
         <div
           className={`fixed top-0 ${side}-0 z-40 flex h-full w-[270px] flex-none flex-col bg-[#F9F5F2]/90 dark:bg-[#8B7355] p-2 text-[14px] transition-all sm:relative sm:top-0 `}
         >
-          <div className="flex items-center">
+          <div className="flex items-center gap-x-4 mb-3">
             {addButtonForSide(side)}
             <button
-              className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-[#8B7355] dark:border-[#8B7355] p-3 text-sm text-[#8B7355] dark:text-[#8B7355] transition-colors duration-200 hover:bg-white/80 dark:hover:bg-[#6B563D]"
+              className="mr-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-[#8B7355] dark:border-[#8B7355] px-4 py-3 text-sm text-[#8B7355] dark:text-[#8B7355] transition-colors duration-200 hover:bg-white/80 dark:hover:bg-[#6B563D]"
               onClick={handleCreateFolder}
               title="Create Folder"
             >
