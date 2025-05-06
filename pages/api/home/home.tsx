@@ -1427,7 +1427,7 @@ const Home = ({
                             <Header/>
                         </div>
 
-                        <div className="flex h-full w-full pt-[48px] sm:pt-0">
+                        <div className="flex h-[698px] w-full pt-[48px] sm:pt-0">
 
                             <TabSidebar
                                 side={"left"}
