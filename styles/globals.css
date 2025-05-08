@@ -68,9 +68,22 @@ Header > div {
   height: 6px;
 }
 
-html {
-  background: #202123;
-  overflow-x: hidden;
+html, body, #__next, #root {
+  height: 100vh !important;
+  min-height: 100vh !important;
+  background: #fff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  /* overflow: hidden !important; */
+}
+
+.main-app-container {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: auto;
+  background: #fff;
+  display: flex;
+  flex-direction: row;
 }
 
 body {

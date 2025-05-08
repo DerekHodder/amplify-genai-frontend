@@ -1458,7 +1458,7 @@ const Home = ({
                                 <Tab icon={<IconSettings />} title="Settings"><SettingsBar /></Tab>
                             </TabSidebar>
 
-                            <div className="flex flex-1">
+                            <div className="flex flex-1" style={{ marginLeft: '280px' }}>
                                 {page === 'chat' && (
                                     <Chat stopConversationRef={stopConversationRef} />
                                 )}

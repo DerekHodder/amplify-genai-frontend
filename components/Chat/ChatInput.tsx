@@ -675,9 +675,9 @@ const onAssistantChange = (assistant: Assistant) => {
             </div>
             }
         <div style={{width: chatContainerWidth}}
-            className="px-14 absolute bottom-0 left-0 border-transparent bg-gradient-to-b from-transparent via-white to-white pt-6 dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-2 z-15">
+            className="px-14 absolute bottom-0 left-0 border-transparent bg-gradient-to-b from-transparent via-white to-white dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-0 z-15 mb-0">
             
-            <div className="flex flex-col justify-center items-center stretch mx-2 mt-4 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-[52px] md:last:mb-6 ">
+            <div className="flex flex-col justify-center items-center stretch mx-2 mt-0 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-0 md:last:mb-6 ">
                
                {!showScrollDownButton && !messageIsStreaming && !artifactIsStreaming && featureFlags.qiSummary && !showDataSourceSelector &&
                (selectedConversation && selectedConversation.messages?.length > 0) &&  (

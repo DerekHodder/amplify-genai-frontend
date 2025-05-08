@@ -972,7 +972,7 @@ export const Chat = memo(({stopConversationRef}: Props) => {
                 ) : (
                     <>
                         <div
-                            className="chatcontainer max-h-full overflow-x-hidden overflow-y-auto w-full" 
+                            className="chatcontainer max-h-full overflow-x-hidden overflow-y-auto w-full pb-12" 
                             style={{
                                 height: windowInnerDims.height * 0.94,
                                 width: '100%',

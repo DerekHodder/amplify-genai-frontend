@@ -32,7 +32,7 @@ function App({ Component, pageProps }: AppProps) {
             refetchOnWindowFocus={true}
             refetchWhenOffline={false}
         >
-            <div className={`${inter.className} ${isDarkMode ? 'dark' : ''}`}>
+            <div className={`main-app-container ${inter.className} ${isDarkMode ? 'dark' : ''}`}>
                 <Toaster/>
                 <QueryClientProvider client={queryClient}>
                     <Component {...pageProps} />
