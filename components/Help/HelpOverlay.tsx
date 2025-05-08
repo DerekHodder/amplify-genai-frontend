@@ -50,6 +50,15 @@ const HelpOverlay: React.FC<HelpOverlayProps> = ({ isOpen, onClose, type }) => {
                 </div>
               </div>
             </>
+          ) : type === 'amplify' ? (
+            <>
+              <h2 className="text-xl font-semibold mb-4 text-black">What would you use Amplify for?</h2>
+              <div className="space-y-6 text-black max-h-[70vh] overflow-y-auto">
+                <p>
+                  Hello Davidson faculty, staff, or student! Amplify can be used for a variety of things... type in the chat box to begin your session. You can ask Amplify to summarize your notes, quiz you on course content, help you make lesson plans, edit your code, and more! But remember, AI should not be used to write your essay or plagiarize... those are instances where Amplify breaks the honor code! Make sure to check your professor's AI preferences before using Amplify. Happy learning!
+                </p>
+              </div>
+            </>
           ) : (
             <>
               <h2 className="text-xl font-semibold mb-4 text-black">Help & Resources</h2>

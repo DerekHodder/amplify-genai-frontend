@@ -665,7 +665,6 @@ const onAssistantChange = (assistant: Assistant) => {
 
     return (
         <>
-        <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
         { featureFlags.pluginsOnInput &&
           settingRef.current.featureOptions.includePluginSelector &&
             <div className='relative z-20' style={{height: 0}}>
@@ -973,6 +972,7 @@ const onAssistantChange = (assistant: Assistant) => {
                         >
                             <span className="font-bold text-base align-middle">?</span>
                         </button>
+                        <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} type="amplify" />
 
                         {showAssistantSelect && (
                             <div className="absolute rounded bg-white dark:bg-[#343541]"
