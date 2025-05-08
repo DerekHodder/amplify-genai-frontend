@@ -68,6 +68,15 @@ const HelpOverlay: React.FC<HelpOverlayProps> = ({ isOpen, onClose, type }) => {
                 </p>
               </div>
             </>
+          ) : type === 'share' ? (
+            <>
+              <h2 className="text-xl font-semibold mb-4 text-black">Share a chat!</h2>
+              <div className="space-y-6 text-black max-h-[70vh] overflow-y-auto">
+                <p>
+                  In this tab check out chats shared with you by peers or colleagues, and also share your own. They will be sorted by the username of the person who shared it, with a small conversation title to see what they shared. This feature is awesome to share with your friends while studying the same topic or doing a group project, letting your professor know what you've been up to, and more!
+                </p>
+              </div>
+            </>
           ) : (
             <>
               <h2 className="text-xl font-semibold mb-4 text-black">Help & Resources</h2>

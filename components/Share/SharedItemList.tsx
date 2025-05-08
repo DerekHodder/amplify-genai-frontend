@@ -416,7 +416,7 @@ const SharedItemsList: FC<{}> = () => {
             //     )))
             // ) 
         }
-        {isAuthenticated && <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />}
+        {isAuthenticated && <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} type="share" />}
         </div>
     );
 };
