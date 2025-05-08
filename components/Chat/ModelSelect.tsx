@@ -93,7 +93,7 @@ export const ModelSelect: React.FC<Props> = ({modelId, isDisabled=false, handleM
           ))}
         </select>
       </div>
-      <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
+      <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} type="model" />
     </div>
   );
 };
