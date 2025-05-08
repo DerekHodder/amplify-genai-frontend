@@ -59,6 +59,15 @@ const HelpOverlay: React.FC<HelpOverlayProps> = ({ isOpen, onClose, type }) => {
                 </p>
               </div>
             </>
+          ) : type === 'sidebar' ? (
+            <>
+              <h2 className="text-xl font-semibold mb-4 text-black">Start a new chat!</h2>
+              <div className="space-y-6 text-black max-h-[70vh] overflow-y-auto">
+                <p>
+                  In this tab you can start new chats in Amplify! Feel free to rename your conversations or sort them into folders to make chats easier to find. Amplify chats can be used to aid your academics and learning, but should not become a crutch! Be vigilant in checking the information you receive from AI.
+                </p>
+              </div>
+            </>
           ) : (
             <>
               <h2 className="text-xl font-semibold mb-4 text-black">Help & Resources</h2>
