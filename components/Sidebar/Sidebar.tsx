@@ -163,7 +163,7 @@ const Sidebar = <T,>({
           {footerComponent}
         </div>
       </div>
-      <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} type="sidebar" />
+      <HelpOverlay isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} type={side === 'right' ? 'assistant' : 'sidebar'} />
     </>
   );
 };

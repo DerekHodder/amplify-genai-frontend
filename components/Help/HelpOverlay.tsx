@@ -77,6 +77,15 @@ const HelpOverlay: React.FC<HelpOverlayProps> = ({ isOpen, onClose, type }) => {
                 </p>
               </div>
             </>
+          ) : type === 'assistant' ? (
+            <>
+              <h2 className="text-xl font-semibold mb-4 text-black">Assistant feature... What is it?</h2>
+              <div className="space-y-6 text-black max-h-[70vh] overflow-y-auto">
+                <p>
+                  Sometimes as a student, faculty, and staff member, you have chat prompts you need to use often. The assistant feature allows you to save all these prompts into a button to use quickly in the chat. Instead of retyping your content each time, you can refer back to your assistant. There are already some pre-made assistants in this tab, click around and see if there are any you like!
+                </p>
+              </div>
+            </>
           ) : (
             <>
               <h2 className="text-xl font-semibold mb-4 text-black">Help & Resources</h2>
